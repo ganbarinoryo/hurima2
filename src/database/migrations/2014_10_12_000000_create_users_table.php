@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id'); // PRIMARY KEY
             $table->string('user_name', 255)->nullable(); // ユーザー名（後から入力）
+            $table->string('user_icon', 255)->nullable();
             $table->string('email', 255)->unique()->notNullable(); // メールアドレス（必須）
             $table->string('password', 255)->notNullable(); // パスワード（必須）
             $table->string('postal_code', 10)->nullable(); // 郵便番号（後から入力）

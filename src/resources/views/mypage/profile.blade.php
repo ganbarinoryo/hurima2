@@ -46,31 +46,28 @@
 
     <div class="flex__profile__content">
 
-    <form action="">
+    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 
+        <!-- 画像選択 -->
         <div class="form__group">
-    <div class="form__group-content">
-        <div class="form__input--icon">
-            <!-- 商品画像表示エリア（画像が選択されるとここに表示される） -->
-            <div class="icon">
-                <img id="image-icon" src="" alt="選択された画像" style="display: none;"/> <!-- 初期状態は非表示 -->
-            </div>
-            <!-- 画像選択ボタン -->
-            <div class="image-upload">
-                <input type="file" id="product_image" name="product_image" accept="image/*" class="file-input" />
-                <label for="product_image" class="file-label">
-                    画像を選択する
-                </label>
+            <div class="form__group-content">
+                <div class="form__input--icon">
+                    <div class="icon">
+                        <img id="image-icon" src="" alt="選択された画像" style="display: none;"/>
+                    </div>
+                    <div class="image-upload">
+                        <input type="file" id="item_image" name="item_image" accept="image/*" class="file-input" />
+                        <label for="item_image" class="file-label">
+                            画像を選択する
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="form__error">
-            <!-- バリデーションエラーメッセージ -->
-        </div>
-    </div>
-</div>
 
-
-
+        <!-- ユーザー名 -->
         <div class="form__group">
             <div class="form__group-content">
                 <h2>ユーザー名</h2>
@@ -78,11 +75,14 @@
                     <input type="text" id="user_name" name="user_name" value="{{ old('user_name') }}" class="@error('user_name') is-invalid @enderror"/>
                 </div>
                 <div class="form__error">
-                <!--バリデーション追加してから記述-->
+                    @error('user_name')
+                        <span class="error-message">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
 
+        <!-- 郵便番号 -->
         <div class="form__group">
             <div class="form__group-content">
                 <h2>郵便番号</h2>
@@ -90,11 +90,14 @@
                     <input type="text" id="postal_code" name="postal_code" value="{{ old('postal_code') }}" class="@error('postal_code') is-invalid @enderror"/>
                 </div>
                 <div class="form__error">
-                <!--バリデーション追加してから記述-->
+                    @error('postal_code')
+                        <span class="error-message">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
 
+        <!-- 住所 -->
         <div class="form__group">
             <div class="form__group-content">
                 <h2>住所</h2>
@@ -102,11 +105,14 @@
                     <input type="text" id="address" name="address" value="{{ old('address') }}" class="@error('address') is-invalid @enderror"/>
                 </div>
                 <div class="form__error">
-                <!--バリデーション追加してから記述-->
+                    @error('address')
+                        <span class="error-message">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
 
+        <!-- 建物名 -->
         <div class="form__group">
             <div class="form__group-content">
                 <h2>建物名</h2>
@@ -114,17 +120,20 @@
                     <input type="text" id="building_name" name="building_name" value="{{ old('building_name') }}" class="@error('building_name') is-invalid @enderror"/>
                 </div>
                 <div class="form__error">
-                <!--バリデーション追加してから記述-->
+                    @error('building_name')
+                        <span class="error-message">{{ $message }}</span>
+                    @enderror
                 </div>
             </div>
         </div>
 
+        <!-- 更新ボタン -->
         <div class="form__button">
-            <button class="form__button-submit" type="submit">更新する
-            </button>
+            <button class="form__button-submit" type="submit">更新する</button>
         </div>
-
     </form>
+
+
     </div><!--register__contentの終わり-->
 
     <!-- JavaScriptコード -->
