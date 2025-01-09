@@ -1,0 +1,229 @@
+/* 基本スタイル */
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* ヘッダー */
+.header {
+    background-color: black;
+    max-width: 100%;
+    height: 80px;
+}
+
+.header__inner {
+    padding-top: 19px;
+    display: flex;
+}
+
+.header__logo img {
+    max-width: 370px;
+    height: 42px;
+}
+
+.header__inner a {
+    padding-left: 25px;
+    max-width: 370px;
+    height: 42px;
+}
+
+/* 検索バーのスタイル */
+.search-bar {
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    margin: 0 60px;
+}
+
+.search-input {
+    margin: 0 auto;
+    width: 500px;
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: #fff solid 1px;
+    background-color: #fff;
+    color: white;
+    font-size: 17px;
+}
+
+.search-input::placeholder {
+    color: #000000;
+    font-size: 17.5px;
+}
+
+/* ナビゲーションメニュー */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 27px;
+}
+
+/* ナビゲーションリンク */
+.nav__link__login,
+.nav__link__register {
+    padding: 10px 30px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__register {
+    margin-right: 70px;
+}
+
+/* 出品リンクのスタイル */
+.nav__link__sell {
+    color: #000000;
+    background-color: #fff;
+    padding: 10px 20px 10px 23px;
+    font-size: 17px;
+    border-radius: 5px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* リンクのホバー効果 */
+.nav__link:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+/* ユーザー情報を横並びにするためのスタイル */
+.user_data {
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    /* 横並びにする */
+    align-items: center;
+    /* アイコン、名前、ボタンを縦方向に中央揃え */
+    gap: 50px;
+    /* アイコンと他の要素の間隔を調整 */
+    white-space: nowrap;
+
+}
+
+/* ユーザーアイコンのスタイル */
+.user_icon {
+    min-width: 150px;
+    min-height: 150px;
+    /* アイコンのサイズ */
+    border-radius: 50%;
+    /* 丸いアイコンにする */
+    background-color: #d3d3d3;
+    /* アイコンがない場合の背景色 (グレー) */
+    display: flex;
+    justify-content: center;
+    /* アイコンがない場合でも中央揃え */
+    align-items: center;
+    /* アイコンがない場合でも中央揃え */
+}
+
+.user_icon img {
+    width: 100%;
+    /* アイコン画像が指定されている場合に、親要素に合わせて広がる */
+    height: 100%;
+    border-radius: 50%;
+    /* 丸いアイコンにする */
+    object-fit: cover;
+    /* アスペクト比を保って切り抜き */
+}
+
+/* ユーザー名のスタイル */
+.user_name {
+    font-size: 36px;
+    /* ユーザー名のフォントサイズ */
+    font-weight: 700;
+    /* ユーザー名の太さ */
+}
+
+/* プロフィール編集ボタンのスタイル */
+.profile_edit .edit_button {
+    margin-left: 200px;
+    background-color: #ffffff;
+    /* ボタンの背景色 */
+    color: #FF5555;
+    /* ボタンの文字色 */
+    font-weight: 700;
+    /* 文字の太さ */
+    border: 2px solid #FF5555;
+    /* ボタンの枠線の色 */
+    padding: 12px 25px;
+    /* ボタンのパディング */
+    border-radius: 10px;
+    /* 角を丸くする */
+    text-decoration: none;
+    /* リンクの下線を消す */
+    font-size: 26px;
+    /* ボタンの文字サイズ */
+    transition: background-color 0.3s;
+    /* 背景色のホバー時の遷移 */
+}
+
+/* プロフィール編集ボタンにホバーした時のスタイル */
+.profile_edit .edit_button:hover {
+    background-color: #0056b3;
+    /* ホバー時の背景色 */
+}
+
+
+
+
+
+/* タブのスタイル */
+.tabs {
+    display: flex;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #5F5F5F;
+}
+
+.tab {
+    padding-left: 80px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.tab.active {
+    color: #ff5555;
+    padding-left: 125px;
+}
+
+/* 商品グリッドのスタイル */
+.products {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-right: 90px;
+    margin-bottom: 50px;
+    margin-left: 90px;
+    background-color: rgb(255, 255, 255);
+}
+
+/* 商品アイテム */
+.product-item {
+    background-color: #a0a0a0;
+    min-width: 380px;
+    min-height: 380px;
+    margin-bottom: 25px;
+    /* 固定のサイズ */
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.product-item p {
+    font-size: 14px;
+    margin: 5px 0;
+}

@@ -1,0 +1,243 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: black;
+    max-width: 100%;
+    height: 80px;
+}
+
+.header__inner {
+    padding-top: 19px;
+    display: flex;
+}
+
+.header__logo img {
+    float: left;
+    max-width: 370px;
+    height: 42px;
+}
+
+.header__inner a {
+    padding-left: 25px;
+    max-width: 370px;
+    height: 42px;
+}
+
+/* 検索バーのスタイル */
+.search-bar {
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    /* 検索バーを中央に広げる */
+    margin: 0 60px;
+}
+
+.search-input {
+    margin: 0 auto;
+    width: 500px;
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: #fff solid 1px;
+    background-color: #fff;
+    color: white;
+    font-size: 17px;
+}
+
+.search-input::placeholder {
+    color: #000000;
+    font-size: 17px;
+}
+
+/* ナビゲーションメニューのスタイル */
+.nav {
+    display: flex;
+    /* 横並びにする */
+    align-items: center;
+    /* アイテムを縦方向に中央揃え */
+    justify-content: flex-end;
+    /* 右端に配置 */
+    padding-right: 27px;
+}
+
+/* ログアウト*/
+.nav__link__logout {
+    padding: 10px;
+    font-size: 17px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__mypage {
+    padding: 10px 20px;
+    margin-right: 70px;
+    font-size: 17px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* 出品リンクのスタイル */
+.nav__link__sell {
+    color: #000000;
+    background-color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 23px;
+    font-size: 17px;
+    border-radius: 5px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link:hover {
+    text-decoration: underline;
+}
+
+/* アイコン表示エリアのスタイル */
+.icon {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: #d3d3d3;
+    /* 初期状態の背景色 */
+    border-radius: 50%;
+    /* 丸くする */
+    margin-right: 25px;
+    /* ボタンとアイコンの間隔 */
+    overflow: hidden;
+    /* 画像がアイコンの枠内に収まるようにする */
+}
+
+.icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* 画像が枠内に収まるように調整 */
+}
+
+/* 商品画像フォームのラベル */
+.file-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 25px;
+    background-color: transparent;
+    color: #ff4d4d;
+    font-size: 15px;
+    font-weight: bolder;
+    cursor: pointer;
+    border: 2px solid #ff4d4d;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+/* 商品画像フォームの中央配置 */
+.form__input--icon {
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+}
+
+/* 入力フォーム（ファイル選択ボタン）のスタイル */
+.file-input {
+    display: none;
+}
+
+/* ファイル選択ボタンのホバー時のスタイル */
+.file-label:hover {
+    background-color: #ffcccc;
+}
+
+.flex__profile-form__heading {
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.flex__profile__content {
+    display: flex;
+    justify-content: center;
+}
+
+.form__group-content p {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.form {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+
+}
+
+.form__group {
+    margin-bottom: 5px;
+}
+
+.form__group-content {
+    margin: 0 auto;
+}
+
+.form__error {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}
+
+.form__input--text input {
+    margin-top: -20px;
+    padding: 10px;
+    width: 680px;
+    height: 60px;
+    border: 1px solid #5F5F5F;
+    border-radius: 3px;
+    appearance: none;
+}
+
+.form__input--text__user_name input {
+    margin-top: -20px;
+    padding: 10px;
+    width: 680px;
+    height: 60px;
+    border: 1px solid #5F5F5F;
+    border-radius: 3px;
+    appearance: none;
+}
+
+.form__button {
+    padding-top: 55px;
+    padding-bottom: 80px;
+}
+
+.form__button-submit {
+    width: 100%;
+    padding: 13px;
+    font-weight: 700;
+    background: #FF5555;
+    color: white;
+    font-size: 26px;
+    border: 1px solid #FF5555;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.flex__form__login-link {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.flex__form__login-link a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #0073CC;
+    font-size: 20px;
+
+}
