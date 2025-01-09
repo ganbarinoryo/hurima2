@@ -14,14 +14,19 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->bigIncrements('id'); // PRIMARY KEY
+            $table->string('user_name', 255)->nullable(); // ユーザー名（後から入力）
+            $table->string('email', 255)->unique()->notNullable(); // メールアドレス（必須）
+            $table->string('password', 255)->notNullable(); // パスワード（必須）
+            $table->string('postal_code', 10)->nullable(); // 郵便番号（後から入力）
+            $table->string('address', 255)->nullable(); // 住所（後から入力）
+            $table->string('building_name', 255)->nullable(); // 建物名（後から入力）
+            
+            $table->timestamp('created_at')->useCurrent(); // 作成日時（必須）
+            $table->timestamp('updated_at')->nullable(); // 更新日時（任意）
+            $table->timestamp('deleted_at')->nullable(); // 削除日時（ソフトデリート対応）
         });
+
     }
 
     /**

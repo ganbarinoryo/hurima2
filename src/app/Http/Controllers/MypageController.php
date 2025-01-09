@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class MypageController extends Controller
 {
-    //
+    public function mypage()
+    {
+        return view("mypage.mypage");
+    }
 }
