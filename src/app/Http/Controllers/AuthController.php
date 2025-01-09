@@ -59,4 +59,17 @@ class AuthController extends Controller
         // 登録後のリダイレクト
         return redirect()->route('login');
     }
+
+    public function logout(Request $request)
+{
+    // ユーザーのログアウト
+    Auth::logout();
+
+    // ログアウト後、セッションを無効にする
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    // ログインページへリダイレクト
+    return redirect()->route('login');
+}
 }

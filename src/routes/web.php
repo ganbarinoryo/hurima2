@@ -17,6 +17,7 @@ Route::get('/', [TopController::class, 'top']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 // ログインフォーム送信
 Route::post('/login', [AuthController::class, 'loginForm'])->name('login.submit');
+Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // 会員登録ページ表示
 Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -32,14 +33,14 @@ Route::get('/purchase', [PurchaseController::class, 'purchase']);
 // 認証済みユーザーのみアクセス可能なルート
 Route::middleware('auth')->group(function () {
     // プロフィール表示
+    Route::get('/mypage', [MypageController::class, 'mypage'])->name('mypage');
+
     Route::get('/mypage/profile', [ProfileController::class, 'profile'])->name('profile');
+
 
     // プロフィール更新処理
     Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
-
-// マイページ
-Route::get('/mypage', [MypageController::class, 'mypage']);
 
 // アイテムページ
 Route::get('/item', [ItemController::class, 'item']);
