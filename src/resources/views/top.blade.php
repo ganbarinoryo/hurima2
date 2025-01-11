@@ -43,58 +43,32 @@
     <main class="main-content">
         <section class="tabs">
             <a class="tab active" href="">おすすめ</a>
+            @auth
             <a class="tab" href="">マイリスト</a>
+            @endauth
+
         </section>
 
         <section class="products">
 
             <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名1</p>
-                <p>価格</p>
+                @if ($item)
+                    <!-- 商品画像 -->
+                    <img 
+                        src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" 
+                        alt="商品画像">
+                    
+                    <!-- 商品名 -->
+                    <p>商品名: {{ $item->item_name }}</p>
+                    
+                    <!-- 価格 -->
+                    <p>価格: ¥{{ number_format($item->price) }}</p>
+                @else
+                    <p>商品が見つかりません。</p>
+                @endif
             </div>
 
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名2</p>
-                <p>価格</p>
-            </div>
 
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名3</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名4</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名5</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名6</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名7</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名8</p>
-                <p>価格</p>
-            </div>
         </section>
     
 </body>

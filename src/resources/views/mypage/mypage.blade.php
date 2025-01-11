@@ -49,12 +49,12 @@
     <div class="user_data">
     <!-- ユーザーアイコン -->
         <div class="user_icon">
-            <img src="<!--画像表示のルートを入れる-->" alt="">
+            <img src="{{ asset('storage/images/' . Auth::user()->user_icon) }}" alt="ユーザーアイコン">
         </div>
     
     <!-- ユーザー名 -->
     <div class="user_name">
-        <p><!--ユーザー名を表示するルートを入れる-->ユーザー名</p>
+        <p>{{ Auth::user()->user_name }}</p>
     </div>
     
     <!-- プロフィール編集ページへのリンク -->
