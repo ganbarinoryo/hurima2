@@ -9,6 +9,28 @@ class Item extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+            'item_name',
+            'description',
+            'category',
+            'condition',
+            'price',
+            'user_id',
+            'status',
+        ];
+
+        // デフォルト値の設定
+        protected static function boot()
+        {
+            parent::boot();
+
+            static::creating(function ($item) {
+                if (empty($item->status)) {
+                    $item->status = '販売中'; // デフォルト値を設定
+                }
+            });
+        }
+
     // item_imagesテーブルとのリレーション
     public function images()
     {

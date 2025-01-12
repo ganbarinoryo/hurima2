@@ -24,8 +24,11 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 // 会員登録フォーム送信
 Route::post('/register', [AuthController::class, 'registerForm'])->name('register.submit');
 
-// 商品出品
-Route::get('/sell', [SellController::class, 'sell']);
+// 出品フォーム
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sell', [SellController::class, 'sell']);
+    Route::post('/sell', [SellController::class, 'store'])->name('sell.store');
+});
 
 // 購入履歴
 Route::get('/purchase', [PurchaseController::class, 'purchase']);

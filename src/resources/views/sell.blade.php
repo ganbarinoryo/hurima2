@@ -26,7 +26,7 @@
                     <a href="/login" class="nav__link__login">ログイン</a>
                     <a href="/register" class="nav__link__register">会員登録</a>
                 @else
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ログアウト
                     </a>
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
@@ -46,18 +46,21 @@
 
     <div class="flex__sell__content">
 
-    <form action="">
+    <form action="/sell" method="POST" enctype="multipart/form-data">
+        @csrf
 
         <div class="form__group">
             <div class="form__group-content">
                 <h3>商品画像</h3>
                 <div class="form__input--img">
                 <!-- ファイル選択用のカスタムラベル -->
-                    <input class="input--img"type="file" id="product_image" name="product_image" accept="image/*" class="@error('product_image') is-invalid @enderror" hidden/>
-                <label for="product_image" class="file-label">画像を選択する</label>
+                    <input class="input--img"type="file" id="item_image" name="item_image" accept="image/*" class="@error('item_image') is-invalid @enderror" hidden/>
+                <label for="item_image" class="file-label">画像を選択する</label>
                 </div>
                 <div class="form__error">
-                <!-- バリデーション追加してから記述 -->
+                @error('item_image')
+    <p class="error">{{ $message }}</p>
+@enderror
                 </div>
             </div>
         </div>
@@ -72,7 +75,9 @@
                     <input type="text" id="category" name="category" value="{{ old('category') }}" class="@error('category') is-invalid @enderror"/>
                 </div>
                 <div class="form__error">
-                <!--バリデーション追加してから記述-->
+                @error('category')
+    <p class="error">{{ $message }}</p>
+@enderror
                 </div>
             </div>
         </div>
@@ -84,7 +89,9 @@
                     <input type="text" id="condition" name="condition" value="{{ old('condition') }}" class="@error('condition') is-invalid @enderror"/>
                 </div>
                 <div class="form__error">
-                <!--バリデーション追加してから記述-->
+                @error('condition')
+    <p class="error">{{ $message }}</p>
+@enderror
                 </div>
             </div>
         </div>
@@ -95,10 +102,12 @@
             <div class="form__group-content">
                 <h3>商品名</h3>
                 <div class="form__input--text">
-                    <input type="text" id="product_name" name="product_name" value="{{ old('product_name') }}" class="@error('product_name') is-invalid @enderror"/>
+                    <input type="text" id="item_name" name="item_name" value="{{ old('item_name') }}" class="@error('item_name') is-invalid @enderror"/>
                 </div>
                 <div class="form__error">
-                <!--バリデーション追加してから記述-->
+                @error('item_name')
+    <p class="error">{{ $message }}</p>
+@enderror
                 </div>
             </div>
         </div>
@@ -108,14 +117,15 @@
                 <h3>商品の説明</h3>
                 <div class="form__input--description">
                     <textarea 
-                    id="product_description" 
-                    name="product_description" 
-                    class="textarea--description @error('product_description') is-invalid @enderror" 
-                    rows="5">
-                    </textarea>
+                        id="description" 
+                        name="description" 
+                        class="textarea--description @error('description') is-invalid @enderror" 
+                        rows="5">{{ old('description') }}</textarea>
                     </div>
                 <div class="form__error">
-                <!-- バリデーションエラーがあれば表示 -->
+                @error('description')
+    <p class="error">{{ $message }}</p>
+@enderror
                 </div>
             </div>
         </div>
@@ -137,7 +147,10 @@
                     </div>
                     </div>
                     <div class="form__error">
-                    <!-- バリデーション追加してから記述 -->
+                    @error('price')
+    <p class="error">{{ $message }}</p>
+@enderror
+
                 </div>
             </div>
         </div>
