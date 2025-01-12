@@ -46,7 +46,8 @@ Route::middleware('auth')->group(function () {
 });
 
 // アイテムページ
-Route::get('/item', [ItemController::class, 'item']);
+Route::get('/item/{id}', [ItemController::class, 'item'])->name('item.show');
+
 
 // 住所ページ
 Route::get('/address', [AddressController::class, 'address']);

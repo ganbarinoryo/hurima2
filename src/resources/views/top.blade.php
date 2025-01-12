@@ -53,20 +53,24 @@
 
             <div class="product-item">
                 @if ($item)
-                    <!-- 商品画像 -->
-                    <img 
-                        src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" 
-                        alt="商品画像">
-                    
+                    <!-- 商品ページへのリンク -->
+                    <a href="{{ route('item.show', ['id' => $item->id]) }}">
+                        <!-- 商品画像 -->
+                        <img 
+                            src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" 
+                            alt="商品画像">
+                    </a>
+
                     <!-- 商品名 -->
                     <p>商品名: {{ $item->item_name }}</p>
-                    
+
                     <!-- 価格 -->
                     <p>価格: ¥{{ number_format($item->price) }}</p>
                 @else
                     <p>商品が見つかりません。</p>
                 @endif
             </div>
+
 
 
         </section>
