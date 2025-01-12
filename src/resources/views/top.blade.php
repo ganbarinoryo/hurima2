@@ -50,9 +50,8 @@
         </section>
 
         <section class="products">
-
             <div class="product-item">
-                @if ($item)
+                @foreach ($items as $item)
                     <!-- 商品ページへのリンク -->
                     <a href="{{ route('item.show', ['id' => $item->id]) }}">
                         <!-- 商品画像 -->
@@ -60,20 +59,17 @@
                             src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" 
                             alt="商品画像">
                     </a>
-
-                    <!-- 商品名 -->
-                    <p>商品名: {{ $item->item_name }}</p>
-
                     <!-- 価格 -->
-                    <p>価格: ¥{{ number_format($item->price) }}</p>
-                @else
-                    <p>商品が見つかりません。</p>
-                @endif
+                    <p>¥{{ number_format($item->price) }}</p>
+                @endforeach
             </div>
 
-
-
+            <!-- 商品が存在しない場合のメッセージ -->
+            @if ($items->isEmpty())
+                <p>商品が見つかりません。</p>
+            @endif
         </section>
+
     
 </body>
 </html>

@@ -10,10 +10,10 @@ class TopController extends Controller
 {
     public function top()
     {
-        // itemsテーブルからランダムで1件取得
-        $item = Item::with('images')->inRandomOrder()->first();
+        // itemsテーブルからランダムで複数件取得
+        $items = Item::with('images')->inRandomOrder()->get();
 
         // ビューに渡す
-        return view('top', compact('item'));
+        return view('top', compact('items'));
     }
 }
