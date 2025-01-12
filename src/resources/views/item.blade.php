@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>coachtechフリマ</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/purchase.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/item.css') }}" />
 </head>
 <body>
 <!--ヘッダー-->
@@ -46,43 +46,43 @@
 <main>
 <!--商品画像-->
     <div class="item__image">
-        <img src="" alt="商品画像">
+        <img src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" alt="商品画像">
     </div>
-<!--商品内容-->
-    <div class="item__detail">
+    <!--商品内容-->
+        <div class="item__detail">
 
-        <h1>商品名</h1>
-        <p class="brand_name">ブランド名</p>
-        <p class="price">¥10,000(値段)</p>
+        <h1>{{ $item->item_name }}</h1>
+        <p class="brand_name">ブランド名<!--ここの欄は無視してください--></p>
+        <p class="price">¥{{ number_format($item->price) }} (値段)</p>
 
         <div class="form__button">
-            <button class="form__button-submit" type="submit">購入する
-            </button>
+            <button class="form__button-submit" type="submit">購入する</button>
         </div>
 
         <h2>商品説明</h2>
         <div class="form__input--description">
-                    <textarea 
-                    id="product_description" 
-                    name="product_description" 
-                    class="textarea--description @error('product_description') is-invalid @enderror" 
-                    rows="5">
-                    </textarea>
-                    </div>
+            <!-- 商品説明を表示 -->
+            <textarea 
+                id="description" 
+                name="description" 
+                class="textarea--description @error('description') is-invalid @enderror" 
+                rows="5" 
+                readonly>{{ $item->description }}</textarea>
+        </div>
 
         <div class="item__data">
             <h2>商品の情報</h2>
-                <div class="item__category">
-                    <h3>カテゴリー</h3>
-                    <p>洋服</p>
-                    <p>メンズ</p>
-                </div>
-                <div class="item__condition">
-                    <h3>商品の状態</h3>
-                    <p>良好</p>
-                </div>
+            <div class="item__category">
+                <h3>カテゴリー</h3>
+                <p>{{ $item->category }}</p>
+            </div>
+            <div class="item__condition">
+                <h3>商品の状態</h3>
+                <p>{{ $item->condition }}</p>
+            </div>
         </div>
     </div>
+
 </main>
     
 </body>
