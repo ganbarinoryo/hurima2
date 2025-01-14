@@ -71,54 +71,24 @@
         </section>
 
         <section class="products">
+            @foreach ($items as $item)
+                <div class="product-item">
+                    <!-- 商品ページへのリンク -->
+                    <a href="{{ route('item.show', ['id' => $item->id]) }}">
+                        <!-- 商品画像 -->
+                        <img 
+                            src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" 
+                            alt="商品画像">
+                    </a>
+                    <!-- 価格 -->
+                    <p>¥{{ number_format($item->price) }}</p>
+                </div>
+            @endforeach
 
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名1</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名2</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名3</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名4</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名5</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名6</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名7</p>
-                <p>価格</p>
-            </div>
-
-            <div class="product-item">
-                <img src="" alt="商品画像">
-                <p>商品名8</p>
-                <p>価格</p>
-            </div>
+            <!-- 商品が存在しない場合のメッセージ -->
+            @if ($items->isEmpty())
+                <p>商品が見つかりません。</p>
+            @endif
         </section>
     
 </body>
