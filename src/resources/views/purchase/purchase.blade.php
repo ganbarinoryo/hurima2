@@ -28,7 +28,7 @@
                     <a href="/login" class="nav__link__login">ログイン</a>
                     <a href="/register" class="nav__link__register">会員登録</a>
                 @else
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="#" class="nav__logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ログアウト
                     </a>
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">

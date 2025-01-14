@@ -31,7 +31,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // 購入履歴
-Route::get('/purchase', [PurchaseController::class, 'purchase']);
+Route::get('/purchase/{id}', [PurchaseController::class, 'purchase'])->name('purchase.show');
+
+
 
 // 認証済みユーザーのみアクセス可能なルート
 Route::middleware('auth')->group(function () {
