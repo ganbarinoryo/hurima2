@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>coachtechフリマ</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/item.css') }}" />
@@ -55,6 +56,36 @@
         <p class="brand_name">ブランド名<!--ここの欄は無視してください--></p>
         <p class="price">¥{{ number_format($item->price) }} (値段)</p>
 
+<!--お気に入り・コメントボタン-->
+    <div class="item-container">
+        <div class="favorite-button-container">
+            <button class="favorite-button {{ $item->is_favorited ? 'favorited' : '' }}" data-item-id="{{ $item->id }}">
+                ☆
+            </button>
+        </div>
+
+        <div class="comment-container">
+            <button id="comment-button" class="comment-button">
+                <img src="{{ asset('images/hukidashi.png') }}" alt="ふきだし">
+            </button>
+            <div id="comment-area" class="comment-area" style="display: none;">
+                <div class="message-container">
+                    <div class="message my-message">
+                        <p>自分が送信したコメントの例です。</p>
+                    </div>
+                    <div class="message other-message">
+                        <p>他のユーザーが送信したコメントの例です。</p>
+                    </div>
+                    </div>
+                <div class="comment-input-area">
+                    <textarea id="comment-input" placeholder="コメントを入力"></textarea>
+                    <button class="comment_send_button" id="comment-submit">コメントを送信する</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--購入するボタン-->
         <div class="form__button">
             <button class="form__button-submit" type="submit">
                 <a href="{{ route('purchase.show', ['id' => $item->id]) }}">購入する</a>
@@ -87,5 +118,60 @@
 
 </main>
     
+<!--お気に入りボタンスクリプト-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const favoriteButtons = document.querySelectorAll('.favorite-button');
+
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.dataset.itemId;
+                const isFavorited = this.classList.contains('favorited');
+
+                fetch(`/favorite/toggle/${itemId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // CSRF対策
+                    },
+                    body: JSON.stringify({ _method: 'POST'}) // POSTメソッドを明示的に指定
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.favorited) {
+                            this.classList.add('favorited');
+                        } else {
+                            this.classList.remove('favorited');
+                        }
+                    } else {
+                        console.error('お気に入り処理に失敗しました。');
+                        // エラーメッセージを表示するなど、適切なエラーハンドリングを行う
+                    }
+                })
+                .catch(error => {
+                    console.error('通信エラー:', error);
+                    // エラーメッセージを表示するなど、適切なエラーハンドリングを行う
+                });
+            });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const commentButton = document.getElementById('comment-button');
+    const commentArea = document.getElementById('comment-area');
+
+    commentButton.addEventListener('click', function() {
+        if (commentArea.style.display === 'none') {
+            commentArea.style.display = 'block';
+        } else {
+            commentArea.style.display = 'none';
+        }
+    });
+});
+</script>
+
 </body>
 </html>

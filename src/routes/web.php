@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
 
 // アイテムページ
 Route::get('/item/{id}', [ItemController::class, 'item'])->name('item.show');
+// アイテムお気に入り
+Route::post('/favorite/toggle/{id}', [ItemController::class, 'toggle'])->name('favorite.toggle');
 
 
 // 住所ページ

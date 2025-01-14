@@ -144,6 +144,173 @@ main {
     /* 固定のサイズ */
 }
 
+.item-container {
+    display: flex;
+    margin-top: -10px;
+}
+
+/*お気に入りボタンのデザイン*/
+.favorite-button-container {
+    /* ボタンを中央揃え */
+    margin: 20px 0;
+}
+
+.favorite-button {
+    font-size: 50px;
+    /* 星のサイズ */
+    color: #000000;
+    /* デフォルトの星の色 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.favorite-button.favorited {
+    color: #f39c12;
+    /* お気に入り時の星の色 (オレンジ) */
+}
+
+.favorite-button:hover {
+    color: #f1c40f;
+    /* ホバー時の星の色 */
+    transform: scale(1.1);
+    /* 少し拡大する */
+}
+
+/* コメントボタンのデザイン */
+.comment-container {
+    margin-top: 13px;
+    display: inline-block;
+    /* 横並びに対応 */
+}
+
+.comment-button {
+    width: 90px;
+    height: 90px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.comment-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* ホバー時のエフェクト */
+.comment-button:hover {
+    transform: scale(1.1);
+    /* 少し拡大する */
+}
+
+
+
+
+/* コメント欄全体のスタイル */
+.comment-area {
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: -78px;
+    margin-top: 10px;
+    width: 540px;
+    max-width: 540px;
+    height: 700px;
+    /* コメント欄のサイズとスタイル */
+    position: relative;
+    /* 子要素を絶対位置で配置する基準にする */
+}
+
+/* メッセージを表示する領域 */
+.message-container {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    /* メッセージのスクロール可能な領域 */
+}
+
+/* 自分のメッセージのスタイル */
+.my-message {
+    text-align: right;
+    /* メッセージを右寄せ */
+}
+
+.my-message p {
+    background-color: #dff9fb;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 5px 0;
+    /* 吹き出し型のデザイン */
+}
+
+/* 他のユーザーのメッセージのスタイル */
+.other-message {
+    text-align: left;
+    /* メッセージを左寄せ */
+}
+
+.other-message p {
+    background-color: #f1f2f6;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 5px 0;
+    /* 吹き出し型のデザイン */
+}
+
+/* コメント入力エリア全体のスタイル */
+.comment-input-area {
+    margin-top: 10px;
+    /* 入力欄とボタンの横並びレイアウト */
+}
+
+/* コメント入力テキストエリアのスタイル */
+.comment-input-area textarea {
+    margin-top: 300px;
+    flex: 1;
+    width: 500px;
+    height: 150px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    /* 入力欄のデザイン */
+}
+
+.comment_send_button {
+    width: 500px;
+    height: 57px;
+    font-weight: bold;
+    background: #FF5555;
+    color: white;
+    font-size: 26px;
+    border: 1px solid #FF5555;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 購入ボタンのレイアウト */
 .form__button-submit {
     width: 500px;

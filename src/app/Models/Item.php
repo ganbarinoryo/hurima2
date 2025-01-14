@@ -36,4 +36,9 @@ class Item extends Model
     {
         return $this->hasMany(ItemImage::class, 'item_id');
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
 }
