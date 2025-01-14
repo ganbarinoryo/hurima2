@@ -1,11 +1,9 @@
-/* 基本スタイル */
 html,
 body {
     margin: 0;
     padding: 0;
 }
 
-/* ヘッダー */
 .header {
     background-color: black;
     max-width: 100%;
@@ -18,6 +16,7 @@ body {
 }
 
 .header__logo img {
+    float: left;
     max-width: 370px;
     height: 42px;
 }
@@ -32,6 +31,7 @@ body {
 .search-bar {
     flex-wrap: nowrap;
     flex-grow: 1;
+    /* 検索バーを中央に広げる */
     margin: 0 60px;
 }
 
@@ -51,17 +51,18 @@ body {
     font-size: 17.5px;
 }
 
-/* ナビゲーションメニュー */
+/* ナビゲーションメニューのスタイル */
 .nav {
     display: flex;
+    /* 横並びにする */
     align-items: center;
+    /* アイテムを縦方向に中央揃え */
     justify-content: flex-end;
+    /* 右端に配置 */
     padding-right: 27px;
 }
 
-/* ナビゲーションリンク */
-.nav__link__login,
-.nav__link__register {
+.nav__link__login {
     padding: 10px 30px;
     font-size: 17.5px;
     color: white;
@@ -70,122 +71,143 @@ body {
 }
 
 .nav__link__register {
+    padding: 10px 30px;
     margin-right: 70px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__logout {
+    padding: 10px 30px;
+    margin-right: 10px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__mypage {
+    padding: 10px 30px;
+    margin-right: 50px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 /* 出品リンクのスタイル */
 .nav__link__sell {
     color: #000000;
     background-color: #fff;
-    padding: 10px 20px 10px 23px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 23px;
     font-size: 17px;
     border-radius: 5px;
     text-decoration: none;
     white-space: nowrap;
 }
 
-/* リンクのホバー効果 */
 .nav__link:hover {
     text-decoration: underline;
 }
 
-
-
+/* メインコンテンツ */
 main {
     display: flex;
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
     gap: 20px;
-    /* 左側と右側の間隔 */
 }
 
 .left_side {
-    width: 40%;
-    /* 左側の幅 */
+    margin-top: 20px;
+    margin-right: 40px;
+    width: 550px;
 }
 
 .right_side {
-    width: 60%;
-    /* 右側の幅 */
-}
-
-.product_info {
+    width: 550px;
     display: flex;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-    /* 下線を追加 */
-    padding-bottom: 20px;
+    /* 追加: 右側をFlexboxコンテナにする */
+    flex-direction: column;
+    /* 追加: 縦方向に配置 */
 }
 
-.product_image {
-    width: 380px;
-    /* 画像の幅 */
-    height: 380px;
-    /* 画像の高さ */
+.item_image {
+    width: 550px;
+    height: 550px;
     background-color: #eee;
-    /* 仮の背景色 */
-    margin-right: 20px;
     display: flex;
-    /* 画像を中央に配置するために追加 */
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    /* 画像を中央に配置 */
 }
 
-.product_image img {
+.item_image img {
     max-width: 100%;
     max-height: 100%;
 }
 
-.product_details {}
-
-.product_name {
-    margin: 0;
-}
-
-.product_price {
-    margin: 0;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.section_title {
-    margin-bottom: 10px;
-}
-
-.change_link {
-    display: block;
-    /* リンクをブロック要素にする */
+/* テーブル関連 */
+.item_information {
+    margin-top: 20px;
+    width: 550px;
     margin-bottom: 20px;
-    color: blue;
-    text-decoration: none;
-}
-
-.product_information {
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.product_table {
-    width: 100%;
-    border-collapse: collapse;
-    /* テーブルの境界線をまとめる */
-}
-
-.product_table th,
-.product_table td {
-    padding: 20px;
     border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.item_table {
+    width: 550px;
+    border: 2px solid #ccc;
+    /* 外枠に境界線を追加 */
+    border-radius: 10px;
+    /* 外枠を丸くする */
+    overflow: hidden;
+    /* 内側のセルの角を丸くするために追加 */
+}
+
+.item_table th {
+    padding: 25px;
+    border: 1px solid #ccc;
+    /* セルの境界線 */
+    text-align: center;
+}
+
+.item_table td {
+    padding: 25px;
+    border: 1px solid #ccc;
+    /* セルの境界線 */
     text-align: left;
 }
 
+.item_table th a {
+    display: block;
+    /* ブロック要素にする */
+    text-align: center;
+    /* 中央揃え */
+    margin: 10px auto 0;
+    /* 上マージンと左右のマージンを調整 */
+    text-decoration: none;
+    color: #3070ba;
+    font-size: 13px;
+}
+
+/* ボタン関連 */
 .form__button {
     text-align: center;
-    /* ボタンを中央寄せ */
+    margin-top: auto;
+    /* ボタンを最下部に配置 */
 }
 
 .form__button-submit {
-    width: 500px;
+    width: 550px;
     height: 57px;
     font-weight: bold;
     background: #FF5555;
@@ -200,23 +222,43 @@ main {
 @media (max-width: 768px) {
     main {
         flex-direction: column;
-        /* 縦並びにする */
     }
 
     .left_side,
     .right_side {
         width: 100%;
-        /* 幅を100%にする */
     }
 
-    .product_info {
-        flex-direction: column;
-    }
-
-    .product_image {
+    .item_image {
         width: 100%;
-        height: auto;
-        margin-right: 0;
-        margin-bottom: 10px;
+        height: 100%;
+        margin-bottom: 20px;
+        /* 下マージンを追加 */
+    }
+
+    /* テーブル関連 */
+    .item_information {
+        margin-top: 20px;
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 50px;
+    }
+
+    .item_table {
+        width: 100%;
+        border: 2px solid #ccc;
+        /* 外枠に境界線を追加 */
+        border-radius: 10px;
+        /* 外枠を丸くする */
+        overflow: hidden;
+        /* 内側のセルの角を丸くするために追加 */
+    }
+
+
+    .form__button-submit {
+        width: 100%;
+        /* スマホでボタンをフル幅にする */
     }
 }

@@ -157,6 +157,11 @@ main {
     cursor: pointer;
 }
 
+.form__button a {
+    text-decoration: none;
+    color: #fff;
+}
+
 /* 商品説明レイアウト */
 .item__detail {
     margin-top: -37px;
