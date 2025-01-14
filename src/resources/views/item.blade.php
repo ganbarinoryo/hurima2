@@ -53,7 +53,6 @@
         <div class="item__detail">
 
         <h1>{{ $item->item_name }}</h1>
-        <p class="brand_name">ブランド名<!--ここの欄は無視してください--></p>
         <p class="price">¥{{ number_format($item->price) }} (値段)</p>
 
 <!--お気に入り・コメントボタン-->
@@ -86,6 +85,7 @@
     </div>
 
 <!--購入するボタン-->
+    <div class="item_data">
         <div class="form__button">
             <button class="form__button-submit" type="submit">
                 <a href="{{ route('purchase.show', ['id' => $item->id]) }}">購入する</a>
@@ -115,6 +115,7 @@
             </div>
         </div>
     </div>
+</div>
 
 </main>
     
@@ -159,19 +160,26 @@
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
     const commentButton = document.getElementById('comment-button');
     const commentArea = document.getElementById('comment-area');
+    const itemData = document.querySelector('.item_data'); // 該当部分のセクションを取得
 
-    commentButton.addEventListener('click', function() {
+    commentButton.addEventListener('click', function () {
         if (commentArea.style.display === 'none') {
+            // コメント欄を表示し、商品情報を非表示に
             commentArea.style.display = 'block';
+            itemData.style.display = 'none';
         } else {
+            // コメント欄を非表示にし、商品情報を再表示
             commentArea.style.display = 'none';
+            itemData.style.display = 'block';
         }
     });
 });
+
 </script>
+
 
 </body>
 </html>
