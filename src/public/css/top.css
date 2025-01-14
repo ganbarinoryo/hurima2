@@ -119,32 +119,44 @@ body {
     text-decoration: none;
 }
 
-/* 商品グリッドのスタイル */
 .products {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(224, 161, 161);
+    /* 折り返しを有効にする */
+    justify-content: center;
+    /* 横方向の中央揃え */
+    align-items: center;
+    /* 縦方向の中央揃え（アイテム全体の高さに基づく） */
+    gap: 50px;
+    padding-bottom: 50px;
+    /* アイテム間の間隔を設定 */
 }
 
 .product-item {
     background-color: #a0a0a0;
     min-width: 380px;
-    min-height: 380px;
-    margin-bottom: 25px;
-    /* 固定のサイズ */
+    max-width: 380px;
+    box-sizing: border-box;
+    /* パディングを含めた幅を調整 */
+    margin-top: 40px;
+    /* 下部マージン */
 }
 
-/* アイテム内の画像 */
 .product-item img {
-    width: 380px;
-    height: 380px;
+    width: 100%;
+    /* アイテム内で画像を親要素の幅に合わせる */
+    height: auto;
+    /* 縦横比を維持 */
     object-fit: cover;
 }
 
 .product-item p {
-    font-size: 14px;
-    margin: 5px 0;
+    position: absolute;
+    /* 絶対位置 */
+    margin-left: 10px;
+    margin-top: -50px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #5F5F5F;
+    color: #fff;
 }

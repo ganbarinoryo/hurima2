@@ -50,8 +50,8 @@
         </section>
 
         <section class="products">
-            <div class="product-item">
-                @foreach ($items as $item)
+            @foreach ($items as $item)
+                <div class="product-item">
                     <!-- 商品ページへのリンク -->
                     <a href="{{ route('item.show', ['id' => $item->id]) }}">
                         <!-- 商品画像 -->
@@ -61,14 +61,15 @@
                     </a>
                     <!-- 価格 -->
                     <p>¥{{ number_format($item->price) }}</p>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
 
             <!-- 商品が存在しない場合のメッセージ -->
             @if ($items->isEmpty())
                 <p>商品が見つかりません。</p>
             @endif
         </section>
+
 
     
 </body>
