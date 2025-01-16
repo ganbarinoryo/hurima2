@@ -51,6 +51,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/item/{id}', [ItemController::class, 'item'])->name('item.show');
 // アイテムお気に入り
 Route::post('/favorite/toggle/{id}', [ItemController::class, 'toggle'])->name('favorite.toggle');
+// コメント
+Route::get('/items/{id}/comments', [ItemController::class, 'getComments']);
+Route::post('/items/{id}/comments', [ItemController::class, 'addComment']);
 
 
 // 住所ページ

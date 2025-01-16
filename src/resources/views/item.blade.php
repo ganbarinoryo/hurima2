@@ -62,26 +62,22 @@
                 ☆
             </button>
         </div>
-
+<!--コメント欄-->
         <div class="comment-container">
             <button id="comment-button" class="comment-button">
                 <img src="{{ asset('images/hukidashi.png') }}" alt="ふきだし">
             </button>
             <div id="comment-area" class="comment-area" style="display: none;">
-                <div class="message-container">
-                    <div class="message my-message">
-                        <p>自分が送信したコメントの例です。</p>
-                    </div>
-                    <div class="message other-message">
-                        <p>他のユーザーが送信したコメントの例です。</p>
-                    </div>
-                    </div>
+                <div id="comments" class="message-container">
+                    <!-- コメントを動的に挿入 -->
+                </div>
                 <div class="comment-input-area">
                     <textarea id="comment-input" placeholder="コメントを入力"></textarea>
                     <button class="comment_send_button" id="comment-submit">コメントを送信する</button>
                 </div>
             </div>
         </div>
+
     </div>
 
 <!--購入するボタン-->
@@ -159,26 +155,76 @@
     });
 </script>
 
+<!--コメント欄表示・非表示・送受信-->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const commentButton = document.getElementById('comment-button');
-    const commentArea = document.getElementById('comment-area');
-    const itemData = document.querySelector('.item_data'); // 該当部分のセクションを取得
+    document.addEventListener('DOMContentLoaded', () => {
+        const commentButton = document.getElementById('comment-button');
+        const commentArea = document.getElementById('comment-area');
+        const commentsContainer = document.getElementById('comments');
+        const commentInput = document.getElementById('comment-input');
+        const commentSubmit = document.getElementById('comment-submit');
+        const itemData = document.querySelector('.item_data'); // 商品情報セクション
+        const itemId = {{ $item->id }};
 
-    commentButton.addEventListener('click', function () {
-        if (commentArea.style.display === 'none') {
-            // コメント欄を表示し、商品情報を非表示に
-            commentArea.style.display = 'block';
-            itemData.style.display = 'none';
-        } else {
-            // コメント欄を非表示にし、商品情報を再表示
-            commentArea.style.display = 'none';
-            itemData.style.display = 'block';
+        // 初期状態を設定
+        commentArea.style.display = 'none'; // コメント欄は非表示
+        itemData.style.display = 'block';  // 商品情報は表示
+
+        // コメントエリアのトグル表示
+        commentButton.addEventListener('click', () => {
+            if (commentArea.style.display === 'none' || commentArea.style.display === '') {
+                // コメント欄を表示、商品情報を非表示
+                commentArea.style.display = 'block';
+                itemData.style.display = 'none';
+                loadComments(); // コメントをロード
+            } else {
+                // コメント欄を非表示、商品情報を表示
+                commentArea.style.display = 'none';
+                itemData.style.display = 'block';
+            }
+        });
+
+        // コメント取得
+        function loadComments() {
+            fetch(`/items/${itemId}/comments`)
+                .then(response => response.json())
+                .then(comments => {
+                    commentsContainer.innerHTML = '';
+                    comments.forEach(comment => {
+                        const message = document.createElement('div');
+                        message.classList.add('message', comment.user_id === {{ Auth::id() }} ? 'my-message' : 'other-message');
+                        message.innerHTML = `<p>${comment.comment}</p><small>${comment.user.name}</small>`;
+                        commentsContainer.appendChild(message);
+                    });
+                });
         }
-    });
-});
 
+        // コメント送信
+        commentSubmit.addEventListener('click', () => {
+            const comment = commentInput.value.trim();
+            if (!comment) return;
+
+            fetch(`/items/${itemId}/comments`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ comment })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const message = document.createElement('div');
+                    message.classList.add('message', 'my-message');
+                    message.innerHTML = `<p>${data.comment}</p><small>${data.user.name}</small>`;
+                    commentsContainer.prepend(message);
+                    commentInput.value = '';
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
 </script>
+
 
 
 </body>

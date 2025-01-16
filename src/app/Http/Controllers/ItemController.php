@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
 
 class ItemController extends Controller
 {
@@ -36,5 +37,34 @@ class ItemController extends Controller
             $user->favorites()->attach($id);
             return response()->json(['success' => true, 'favorited' => true]);
         }
+    }
+
+    // コメントの取得
+    public function getComments($itemId)
+    {
+        $comments = Comment::with('user')
+            ->where('item_id', $itemId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($comments);
+    }
+
+    // コメントの保存
+    public function addComment(Request $request, $itemId)
+    {
+        $request->validate([
+            'comment' => 'required|string|max:1000',
+        ]);
+
+        $comment = Comment::create([
+            'user_id' => Auth::id(),
+            'item_id' => $itemId,
+            'comment' => $request->input('comment'),
+        ]);
+
+        $comment->load('user'); // ユーザー情報を含む
+
+        return response()->json($comment);
     }
 }
