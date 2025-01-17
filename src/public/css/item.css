@@ -233,22 +233,6 @@ main {
     /* メッセージのスクロール可能な領域 */
 }
 
-/* 自分のメッセージのスタイル */
-.my-message {
-    text-align: right;
-    /* メッセージを右寄せ */
-}
-
-.my-message p {
-    background-color: #dff9fb;
-    color: #333;
-    padding: 8px 12px;
-    border-radius: 15px;
-    display: inline-block;
-    margin: 5px 0;
-    /* 吹き出し型のデザイン */
-}
-
 /* 他のユーザーのメッセージのスタイル */
 .other-message {
     text-align: left;
@@ -265,15 +249,54 @@ main {
     /* 吹き出し型のデザイン */
 }
 
+/*ここから*/
+.comment {
+    width: 100%;
+    /* 親要素に合わせて幅を調整 */
+    margin-bottom: 10px;
+    display: flex;
+    /* Flexboxを使用 */
+    flex-direction: column;
+    /* 縦方向に並べる */
+    align-items: flex-end;
+    /* 右寄せにする */
+}
+
+.comment p {
+    background-color: #dff9fb;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 5px 0;
+    /* 吹き出し型のデザイン */
+}
+
+.comment_header {
+    display: flex;
+    align-items: center;
+}
+
+.user-icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.user-name {
+    margin-right: 5px;
+}
+
 /* コメント入力エリア全体のスタイル */
 .comment-input-area {
-    margin-top: 10px;
+    margin-top: 300px;
     /* 入力欄とボタンの横並びレイアウト */
 }
 
 /* コメント入力テキストエリアのスタイル */
 .comment-input-area textarea {
-    margin-top: 300px;
+    margin-top: -20px;
     flex: 1;
     width: 500px;
     height: 150px;
@@ -295,21 +318,6 @@ main {
     border-radius: 4px;
     cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 購入ボタンのレイアウト */
 .form__button-submit {

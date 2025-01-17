@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_name', // 追加
+        'user_icon', // 追加
     ];
 
     /**
@@ -45,5 +47,11 @@ class User extends Authenticatable
     public function favorites()
     {
         return $this->belongsToMany(Item::class, 'favorites')->withTimestamps();
+    }
+
+    // コメントとのリレーション
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

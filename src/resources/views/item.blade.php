@@ -158,69 +158,97 @@
 <!--コメント欄表示・非表示・送受信-->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // 各要素を取得
         const commentButton = document.getElementById('comment-button');
         const commentArea = document.getElementById('comment-area');
         const commentsContainer = document.getElementById('comments');
         const commentInput = document.getElementById('comment-input');
         const commentSubmit = document.getElementById('comment-submit');
-        const itemData = document.querySelector('.item_data'); // 商品情報セクション
+        const itemData = document.querySelector('.item_data');
         const itemId = {{ $item->id }};
 
-        // 初期状態を設定
-        commentArea.style.display = 'none'; // コメント欄は非表示
-        itemData.style.display = 'block';  // 商品情報は表示
+        // 初期表示状態を設定
+        commentArea.style.display = 'none';
+        itemData.style.display = 'block';
 
-        // コメントエリアのトグル表示
+        // コメントボタンクリック時の処理
         commentButton.addEventListener('click', () => {
             if (commentArea.style.display === 'none' || commentArea.style.display === '') {
-                // コメント欄を表示、商品情報を非表示
                 commentArea.style.display = 'block';
                 itemData.style.display = 'none';
-                loadComments(); // コメントをロード
+                loadComments(itemId);
             } else {
-                // コメント欄を非表示、商品情報を表示
                 commentArea.style.display = 'none';
                 itemData.style.display = 'block';
             }
         });
 
-        // コメント取得
-        function loadComments() {
+        // コメントを読み込む関数
+        function loadComments(itemId) {
+            commentsContainer.innerHTML = '<p>Loading...</p>';
+
             fetch(`/items/${itemId}/comments`)
                 .then(response => response.json())
                 .then(comments => {
                     commentsContainer.innerHTML = '';
                     comments.forEach(comment => {
-                        const message = document.createElement('div');
-                        message.classList.add('message', comment.user_id === {{ Auth::id() }} ? 'my-message' : 'other-message');
-                        message.innerHTML = `<p>${comment.comment}</p><small>${comment.user.name}</small>`;
-                        commentsContainer.appendChild(message);
+                        addCommentToDOM(comment);
                     });
+                })
+                .catch(error => {
+                    console.error('Error fetching comments:', error);
+                    commentsContainer.innerHTML = '<p>コメントの取得に失敗しました。</p>';
                 });
         }
 
-        // コメント送信
+        // コメントをDOMに追加する関数
+        function addCommentToDOM(comment) {
+            const commentDiv = document.createElement('div');
+            commentDiv.classList.add('comment');
+
+            const commentHeader = document.createElement('div');
+            commentHeader.classList.add('comment_header');
+
+            const userName = document.createElement('span');
+            userName.textContent = comment.user.name;
+            userName.classList.add('user-name');
+
+            const userIcon = document.createElement('img');
+            userIcon.src = comment.user.icon_url;
+            userIcon.alt = 'User Icon';
+            userIcon.classList.add('user-icon');
+
+            commentHeader.appendChild(userName);
+            commentHeader.appendChild(userIcon);
+
+            const commentBody = document.createElement('div');
+            commentBody.classList.add('comment_body');
+            commentBody.innerHTML = `<p>${comment.comment}</p>`;
+
+            commentDiv.appendChild(commentHeader);
+            commentDiv.appendChild(commentBody);
+            commentsContainer.appendChild(commentDiv);
+        }
+
+        // コメント送信ボタンクリック時の処理
         commentSubmit.addEventListener('click', () => {
-            const comment = commentInput.value.trim();
-            if (!comment) return;
+            const commentText = commentInput.value.trim();
+            if (!commentText) return;
 
             fetch(`/items/${itemId}/comments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ comment })
+                body: JSON.stringify({ comment: commentText })
             })
                 .then(response => response.json())
                 .then(data => {
-                    const message = document.createElement('div');
-                    message.classList.add('message', 'my-message');
-                    message.innerHTML = `<p>${data.comment}</p><small>${data.user.name}</small>`;
-                    commentsContainer.prepend(message);
+                    addCommentToDOM(data);
                     commentInput.value = '';
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('Error posting comment:', error));
         });
     });
 </script>

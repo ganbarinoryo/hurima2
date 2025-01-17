@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // トップページ
@@ -47,13 +48,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-// アイテムページ
 Route::get('/item/{id}', [ItemController::class, 'item'])->name('item.show');
-// アイテムお気に入り
 Route::post('/favorite/toggle/{id}', [ItemController::class, 'toggle'])->name('favorite.toggle');
-// コメント
-Route::get('/items/{id}/comments', [ItemController::class, 'getComments']);
-Route::post('/items/{id}/comments', [ItemController::class, 'addComment']);
+
+Route::get('/items/{id}/comments', [CommentController::class, 'getComments']);
+Route::post('/items/{id}/comments', [CommentController::class, 'storeComment'])->middleware('auth');
+
+
 
 
 // 住所ページ
