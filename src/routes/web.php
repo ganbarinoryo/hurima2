@@ -29,9 +29,11 @@ Route::middleware('auth')->group(function () {
     // マイページ関連
     Route::get('/mypage', [MypageController::class, 'mypage'])->name('mypage');
 
-    // プロフィール表示と更新
-    Route::get('/mypage/profile', [ProfileController::class, 'profile'])->name('profile'); // プロフィール表示
-    Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update'); // プロフィール更新処理
+    // プロフィール表示と更新ルート
+    Route::get('/mypage/profile', [ProfileController::class, 'profile'])->name('profile');
+    Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+
 
     // 出品関連
     Route::get('/sell', [SellController::class, 'sell'])->name('sell.show'); // 出品フォーム

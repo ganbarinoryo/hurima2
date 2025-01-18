@@ -48,14 +48,16 @@
 
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    @method('PUT')
+    @method('PUT')  <!-- PUTメソッドを使用 -->
 
     <!-- 画像選択 -->
     <div class="form__group">
         <div class="form__group-content">
             <div class="form__input--icon">
                 <div class="icon">
-                    <img id="image-icon" src="{{ asset('storage/' . $user->user_icon) }}" alt="選択された画像" style="display: {{ Auth::user()->user_icon ? 'block' : 'none' }};" />
+                <!-- 画像表示 -->
+                <img id="user-icon" src="{{ asset('storage/' . Auth::user()->user_icon) }}" alt="選択された画像" style="display: {{ Auth::user()->user_icon ? 'block' : 'none' }};" />
+
                 </div>
                 <div class="image-upload">
                     <input type="file" id="user_icon" name="user_icon" accept="image/*" class="file-input" />
@@ -135,12 +137,13 @@
 
 
 
+
     </div><!--register__contentの終わり-->
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const fileInput = document.getElementById('user_icon');
-            const imgElement = document.getElementById('image-icon');
+            const imgElement = document.getElementById('user-icon');
 
             fileInput.addEventListener('change', function (event) {
                 const file = event.target.files[0];

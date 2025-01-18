@@ -8,17 +8,18 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    // プロフィール表示
     public function profile()
     {
         // 現在ログイン中のユーザーを取得
         $user = Auth::user();
 
-        // ユーザー情報をビューに渡す
-        return view("mypage.profile", compact('user'));
+        // プロフィールページにユーザー情報を渡してビューを表示
+        return view('mypage.profile', compact('user'));
     }
 
 
-    // プロフィール情報の更新処理
+    // プロフィール更新
     public function update(Request $request)
     {
         // バリデーション
@@ -37,28 +38,24 @@ class ProfileController extends Controller
         $user->address = $validated['address'];
         $user->building_name = $validated['building_name'] ?? $user->building_name;
 
-        // 画像がアップロードされている場合の処理
+        // 画像がアップロードされている場合
         if ($request->hasFile('user_icon')) {
-            $imagePath = $request->file('user_icon')->store('images', 'public'); // 公開ディレクトリに保存
-            $user->user_icon = $imagePath; // パス全体を保存
+            // 画像をpublic/imagesディレクトリに保存
+            $imagePath = $request->file('user_icon')->store('public/images');
+            
+            // 保存された画像のパスを取得（images/で始まるように設定）
+            $imageUrl = 'images/' . basename($imagePath);
+
+            // データベースに保存
+            $user->user_icon = $imageUrl;
         }
 
-        if ($request->hasFile('user_icon')) {
-            // 既存のアイコンがあれば削除
-            if ($user->user_icon) {
-                Storage::disk('public')->delete($user->user_icon);
-            }
-
-            // 新しいアイコンを保存
-            $imagePath = $request->file('user_icon')->store('images', 'public');
-            $user->user_icon = $imagePath;
-        }
-
-        // データベースに保存
+        // 更新をデータベースに保存
         $user->save();
 
-        // 更新後にリダイレクト
-        return redirect()->route('profile');
+        // プロフィールページにリダイレクト
+        return redirect()->route('profile')->with('success', 'プロフィールが更新されました。');
     }
+
 
 }
