@@ -49,7 +49,7 @@
     <div class="user_data">
     <!-- ユーザーアイコン -->
         <div class="user_icon">
-            <img src="{{ asset('storage/images/' . Auth::user()->user_icon) }}" alt="ユーザーアイコン">
+            <img src="{{ asset('storage/' . $user->user_icon) }}" alt="ユーザーアイコン">
         </div>
     
     <!-- ユーザー名 -->

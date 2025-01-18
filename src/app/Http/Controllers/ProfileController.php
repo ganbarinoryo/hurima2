@@ -10,8 +10,13 @@ class ProfileController extends Controller
 {
     public function profile()
     {
-        return view("mypage.profile");
+        // 現在ログイン中のユーザーを取得
+        $user = Auth::user();
+
+        // ユーザー情報をビューに渡す
+        return view("mypage.profile", compact('user'));
     }
+
 
     // プロフィール情報の更新処理
     public function update(Request $request)
@@ -34,8 +39,19 @@ class ProfileController extends Controller
 
         // 画像がアップロードされている場合の処理
         if ($request->hasFile('user_icon')) {
-            $imagePath = $request->file('user_icon')->store('public/images'); // ストレージに保存
-            $user->user_icon = basename($imagePath); // ファイル名を保存
+            $imagePath = $request->file('user_icon')->store('images', 'public'); // 公開ディレクトリに保存
+            $user->user_icon = $imagePath; // パス全体を保存
+        }
+
+        if ($request->hasFile('user_icon')) {
+            // 既存のアイコンがあれば削除
+            if ($user->user_icon) {
+                Storage::disk('public')->delete($user->user_icon);
+            }
+
+            // 新しいアイコンを保存
+            $imagePath = $request->file('user_icon')->store('images', 'public');
+            $user->user_icon = $imagePath;
         }
 
         // データベースに保存

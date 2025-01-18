@@ -55,7 +55,7 @@
         <div class="form__group-content">
             <div class="form__input--icon">
                 <div class="icon">
-                    <img id="image-icon" src="{{ asset('storage/images/' . Auth::user()->user_icon) }}" alt="選択された画像" style="display: {{ Auth::user()->user_icon ? 'block' : 'none' }};" />
+                    <img id="image-icon" src="{{ asset('storage/' . $user->user_icon) }}" alt="選択された画像" style="display: {{ Auth::user()->user_icon ? 'block' : 'none' }};" />
                 </div>
                 <div class="image-upload">
                     <input type="file" id="user_icon" name="user_icon" accept="image/*" class="file-input" />

@@ -165,7 +165,7 @@
         const commentInput = document.getElementById('comment-input');
         const commentSubmit = document.getElementById('comment-submit');
         const itemData = document.querySelector('.item_data');
-        const itemId = {{ $item->id }};
+        const itemId = {{ $item->id }};  // BladeでitemIdを取得
 
         // 初期表示状態を設定
         commentArea.style.display = 'none';
@@ -176,7 +176,7 @@
             if (commentArea.style.display === 'none' || commentArea.style.display === '') {
                 commentArea.style.display = 'block';
                 itemData.style.display = 'none';
-                loadComments(itemId);
+                loadComments(itemId);  // コメントのロード
             } else {
                 commentArea.style.display = 'none';
                 itemData.style.display = 'block';
@@ -192,7 +192,7 @@
                 .then(comments => {
                     commentsContainer.innerHTML = '';
                     comments.forEach(comment => {
-                        addCommentToDOM(comment);
+                        addCommentToDOM(comment);  // コメントを表示する関数
                     });
                 })
                 .catch(error => {
@@ -213,8 +213,9 @@
             userName.textContent = comment.user.name;
             userName.classList.add('user-name');
 
+            // アイコンURLの設定
             const userIcon = document.createElement('img');
-            userIcon.src = comment.user.icon_url;
+            userIcon.src = comment.user.icon_url || '/default-icon.png';  // アイコンURLがない場合はデフォルトアイコンを表示
             userIcon.alt = 'User Icon';
             userIcon.classList.add('user-icon');
 
@@ -223,11 +224,11 @@
 
             const commentBody = document.createElement('div');
             commentBody.classList.add('comment_body');
-            commentBody.innerHTML = `<p>${comment.comment}</p>`;
+            commentBody.innerHTML = `<p>${comment.comment}</p>`;  // コメント本文
 
             commentDiv.appendChild(commentHeader);
             commentDiv.appendChild(commentBody);
-            commentsContainer.appendChild(commentDiv);
+            commentsContainer.appendChild(commentDiv);  // コメントを表示
         }
 
         // コメント送信ボタンクリック時の処理
@@ -241,17 +242,18 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ comment: commentText })
+                body: JSON.stringify({ comment: commentText })  // 入力されたコメントを送信
             })
                 .then(response => response.json())
                 .then(data => {
-                    addCommentToDOM(data);
-                    commentInput.value = '';
+                    addCommentToDOM(data);  // 送信したコメントをDOMに追加
+                    commentInput.value = '';  // コメント入力欄をクリア
                 })
                 .catch(error => console.error('Error posting comment:', error));
         });
     });
 </script>
+
 
 
 

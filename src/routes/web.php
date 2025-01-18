@@ -14,48 +14,40 @@ use Illuminate\Support\Facades\Route;
 // トップページ
 Route::get('/', [TopController::class, 'top']);
 
-// ログインページ表示
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-// ログインフォーム送信
-Route::post('/login', [AuthController::class, 'loginForm'])->name('login.submit');
-Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
+// ログイン関連
+Route::get('/login', [AuthController::class, 'login'])->name('login'); // ログインページ表示
+Route::post('/login', [AuthController::class, 'loginForm'])->name('login.submit'); // ログインフォーム送信
+Route::delete('/logout', [AuthController::class, 'logout'])->name('logout'); // ログアウト
 
-// 会員登録ページ表示
-Route::get('/register', [AuthController::class, 'register'])->name('register');
-// 会員登録フォーム送信
-Route::post('/register', [AuthController::class, 'registerForm'])->name('register.submit');
-
-// 出品フォーム
-Route::middleware(['auth'])->group(function () {
-    Route::get('/sell', [SellController::class, 'sell']);
-    Route::post('/sell', [SellController::class, 'store'])->name('sell.store');
-});
-
-// 購入履歴
-Route::get('/purchase/{id}', [PurchaseController::class, 'purchase'])->name('purchase.show');
-
-
+// 会員登録関連
+Route::get('/register', [AuthController::class, 'register'])->name('register'); // 会員登録ページ表示
+Route::post('/register', [AuthController::class, 'registerForm'])->name('register.submit'); // 会員登録フォーム送信
 
 // 認証済みユーザーのみアクセス可能なルート
 Route::middleware('auth')->group(function () {
-    // プロフィール表示
+
+    // マイページ関連
     Route::get('/mypage', [MypageController::class, 'mypage'])->name('mypage');
 
-    Route::get('/mypage/profile', [ProfileController::class, 'profile'])->name('profile');
+    // プロフィール表示と更新
+    Route::get('/mypage/profile', [ProfileController::class, 'profile'])->name('profile'); // プロフィール表示
+    Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update'); // プロフィール更新処理
 
+    // 出品関連
+    Route::get('/sell', [SellController::class, 'sell'])->name('sell.show'); // 出品フォーム
+    Route::post('/sell', [SellController::class, 'store'])->name('sell.store'); // 出品処理
 
-    // プロフィール更新処理
-    Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // 購入履歴
+    Route::get('/purchase/{id}', [PurchaseController::class, 'purchase'])->name('purchase.show'); // 購入履歴表示
+
+    // コメント関連
+    Route::get('/items/{id}/comments', [CommentController::class, 'getComments']); // コメント取得
+    Route::post('/items/{id}/comments', [CommentController::class, 'storeComment'])->name('comments.store'); // コメント投稿
+
+    // 住所ページ
+    Route::get('/address', [AddressController::class, 'address'])->name('address.show'); // 住所ページ表示
 });
 
-Route::get('/item/{id}', [ItemController::class, 'item'])->name('item.show');
-Route::post('/favorite/toggle/{id}', [ItemController::class, 'toggle'])->name('favorite.toggle');
-
-Route::get('/items/{id}/comments', [CommentController::class, 'getComments']);
-Route::post('/items/{id}/comments', [CommentController::class, 'storeComment'])->middleware('auth');
-
-
-
-
-// 住所ページ
-Route::get('/address', [AddressController::class, 'address']);
+// アイテム関連（認証なしでもアクセス可能）
+Route::get('/item/{id}', [ItemController::class, 'item'])->name('item.show'); // アイテム詳細表示
+Route::post('/favorite/toggle/{id}', [ItemController::class, 'toggle'])->name('favorite.toggle'); // お気に入り登録/解除
