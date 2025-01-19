@@ -236,27 +236,73 @@ main {
 
 /* メッセージを表示する領域 */
 .message-container {
-    max-height: 200px;
+    max-height: 800px;
+    /* 高さの最大値を設定 */
     overflow-y: auto;
+    /* 縦方向にコンテンツがあふれた場合にスクロールを許可 */
     padding: 10px 0;
+    /* 上下の余白 */
     margin-bottom: 10px;
-    /* メッセージのスクロール可能な領域 */
+    /* 下側の余白 */
 }
 
-/* 他のユーザーのメッセージのスタイル */
-.other-message {
+
+
+
+
+
+/* 自分のコメント */
+.my-message {
+    align-items: flex-end;
+    /* 右寄せ */
     text-align: left;
-    /* メッセージを左寄せ */
+    margin-right: 40px !important;
 }
 
-.other-message p {
-    background-color: #f1f2f6;
+.my-message p {
+    background-color: #dff9fb;
+    /* 水色の吹き出し */
     color: #333;
     padding: 8px 12px;
     border-radius: 15px;
-    display: inline-block;
-    margin: 5px 0;
-    /* 吹き出し型のデザイン */
+    margin-right: 10px !important;
+}
+
+/* 他のユーザーのコメント */
+.other-message {
+    align-items: flex-start;
+    /* 左寄せ */
+    text-align: left;
+}
+
+/* 他のユーザーのコメントヘッダーの設定 */
+.other-message .comment_header {
+    flex-direction: row-reverse;
+    /* 名前とアイコンの順序を逆に */
+}
+
+/* 名前とアイコンの間の余白を調整 */
+.other-message .user-name {
+    margin-left: 5px;
+    /* 左側に余白 */
+    margin-right: 0;
+    /* 右側の余白をリセット */
+}
+
+.other-message .user-icon {
+    margin-left: 0;
+    /* 左側の余白をリセット */
+    margin-right: 5px;
+    /* 右側に余白 */
+}
+
+.other-message p {
+    background-color: #d1daff;
+    /* 灰色の吹き出し */
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 85%;
 }
 
 /*ここから*/
@@ -268,12 +314,9 @@ main {
     /* Flexboxを使用 */
     flex-direction: column;
     /* 縦方向に並べる */
-    align-items: flex-end;
-    /* 右寄せにする */
 }
 
 .comment p {
-    background-color: #dff9fb;
     color: #333;
     padding: 8px 12px;
     border-radius: 15px;
@@ -285,6 +328,7 @@ main {
 .comment_header {
     display: flex;
     align-items: center;
+    margin-right: 13px;
 }
 
 .user-icon {
@@ -296,11 +340,20 @@ main {
 
 .user-name {
     margin-right: 5px;
+    font-size: 13px;
 }
+
+
+
+
+
+
+
+
 
 /* コメント入力エリア全体のスタイル */
 .comment-input-area {
-    margin-top: 300px;
+    margin-top: 30px;
     /* 入力欄とボタンの横並びレイアウト */
 }
 
@@ -327,6 +380,7 @@ main {
     border: 1px solid #FF5555;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 50px;
 }
 
 /* 購入ボタンのレイアウト */

@@ -179,52 +179,68 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemId = @json($item->id);
 
     // 初期表示状態の設定
-    if (commentArea) commentArea.style.display = 'none';
-    if (itemDetails) itemDetails.style.display = 'block';
+    toggleVisibility(commentArea, false); // コメントエリアを非表示
+    toggleVisibility(itemDetails, true);  // アイテム詳細エリアを表示
 
     // コメントボタンクリック時の表示切り替え
     if (commentButton) {
         commentButton.addEventListener('click', () => {
             const isCommentAreaVisible = commentArea.style.display === 'block';
-            commentArea.style.display = isCommentAreaVisible ? 'none' : 'block';
-            if (itemDetails) itemDetails.style.display = isCommentAreaVisible ? 'block' : 'none';
+            toggleVisibility(commentArea, !isCommentAreaVisible);
+            toggleVisibility(itemDetails, isCommentAreaVisible);
 
             // コメント欄を表示した際にコメントをロード
             if (!isCommentAreaVisible) loadComments(itemId);
         });
     }
 
+    // コメントエリアの表示・非表示を切り替える関数
+    function toggleVisibility(element, isVisible) {
+        if (element) {
+            element.style.display = isVisible ? 'block' : 'none';
+        }
+    }
+
     // コメントを読み込む関数
     async function loadComments(itemId) {
         try {
+            console.log(`Fetching comments for item ID: ${itemId}`);
             commentsContainer.innerHTML = '<p>Loading...</p>';
-            const response = await fetch(`/items/${itemId}/comments`);
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-            const comments = await response.json();
-            commentsContainer.innerHTML = '';
-            comments.forEach(comment => addCommentToDOM(comment));
+            const response = await fetch(`/items/${itemId}/comments`);
+            const data = await response.json();
+
+            if (data.success) {
+                commentsContainer.innerHTML = '';
+                data.comments.forEach(comment => {
+                    const isCurrentUser = comment.user_id === data.currentUserId;
+                    addCommentToDOM(comment, isCurrentUser);
+                });
+            } else {
+                throw new Error(data.message || 'コメントの取得中にエラーが発生しました。');
+            }
         } catch (error) {
             console.error('Error fetching comments:', error);
             commentsContainer.innerHTML = '<p>コメントの取得に失敗しました。</p>';
         }
     }
 
+
     // コメントをDOMに追加する関数
-    function addCommentToDOM(comment) {
+    function addCommentToDOM(comment, isCurrentUser) {
         const commentDiv = document.createElement('div');
-        commentDiv.classList.add('comment');
+        commentDiv.classList.add('comment', isCurrentUser ? 'my-message' : 'other-message');
 
         // ヘッダー（ユーザー名とアイコン）
         const commentHeader = document.createElement('div');
         commentHeader.classList.add('comment_header');
 
         const userName = document.createElement('span');
-        userName.textContent = comment.user?.name || '匿名ユーザー';
+        userName.textContent = comment.user?.name || '匿名ユーザー'; // ユーザー名がない場合のデフォルト
         userName.classList.add('user-name');
 
         const userIcon = document.createElement('img');
-        userIcon.src = comment.user?.icon_url || '/default-icon.png';
+        userIcon.src = comment.user?.icon_url || '/default-icon.png'; // アイコンがない場合のデフォルト
         userIcon.alt = 'User Icon';
         userIcon.classList.add('user-icon');
 
@@ -241,33 +257,45 @@ document.addEventListener('DOMContentLoaded', () => {
         commentsContainer.appendChild(commentDiv);
     }
 
+
+
     // コメント送信処理
     if (commentSubmit) {
         commentSubmit.addEventListener('click', async () => {
             const commentText = commentInput.value.trim();
-            if (!commentText) return;
+            if (!commentText) {
+                alert('コメントを入力してください。');
+                return;
+            }
 
             try {
                 const response = await fetch(`/items/${itemId}/comments`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                     },
-                    body: JSON.stringify({ comment: commentText })
+                    body: JSON.stringify({ comment: commentText }),
                 });
 
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
                 const data = await response.json();
-                addCommentToDOM(data); // 送信したコメントをDOMに追加
-                commentInput.value = ''; // 入力欄をクリア
+                console.log('Posted comment:', data);
+
+                if (data.success) {
+                    addCommentToDOM(data.data, true); // 自分のコメントをDOMに追加
+                    commentInput.value = ''; // 入力欄をクリア
+                } else {
+                    throw new Error(data.message || 'Unknown error while posting comment.');
+                }
             } catch (error) {
                 console.error('Error posting comment:', error);
                 alert('コメントの送信に失敗しました。もう一度お試しください。');
             }
         });
     }
+
 });
 </script>
 
