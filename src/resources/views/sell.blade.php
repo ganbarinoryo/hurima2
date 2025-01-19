@@ -26,7 +26,7 @@
                     <a href="/login" class="nav__link__login">ログイン</a>
                     <a href="/register" class="nav__link__register">会員登録</a>
                 @else
-                    <a href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="#" class="nav__logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ログアウト
                     </a>
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
@@ -157,7 +157,7 @@
 
 
         <div class="form__button">
-            <button class="form__button-submit" type="submit">更新する
+            <button class="form__button-submit" type="submit">出品する
             </button>
         </div>
 

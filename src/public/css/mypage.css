@@ -51,17 +51,18 @@ body {
     font-size: 17.5px;
 }
 
-/* ナビゲーションメニュー */
+/* ナビゲーションメニューのスタイル */
 .nav {
     display: flex;
+    /* 横並びにする */
     align-items: center;
+    /* アイテムを縦方向に中央揃え */
     justify-content: flex-end;
+    /* 右端に配置 */
     padding-right: 27px;
 }
 
-/* ナビゲーションリンク */
-.nav__link__login,
-.nav__link__register {
+.nav__link__login {
     padding: 10px 30px;
     font-size: 17.5px;
     color: white;
@@ -70,14 +71,40 @@ body {
 }
 
 .nav__link__register {
+    padding: 10px 30px;
     margin-right: 70px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__logout {
+    padding: 10px 30px;
+    margin-right: 10px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__mypage {
+    padding: 10px 30px;
+    margin-right: 50px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 /* 出品リンクのスタイル */
 .nav__link__sell {
     color: #000000;
     background-color: #fff;
-    padding: 10px 20px 10px 23px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 23px;
     font-size: 17px;
     border-radius: 5px;
     text-decoration: none;
@@ -178,9 +205,14 @@ body {
 .tabs {
     display: flex;
     width: 100%;
+    padding-left: 15px;
     padding-top: 50px;
     padding-bottom: 10px;
     border-bottom: 2px solid #5F5F5F;
+}
+
+.tab.active {
+    color: #ff5555;
 }
 
 .tab {
@@ -191,39 +223,46 @@ body {
     text-decoration: none;
 }
 
-.tab.active {
-    color: #ff5555;
-    padding-left: 125px;
-}
-
-/* 商品グリッドのスタイル */
 .products {
     display: flex;
-    gap: 60px;
     flex-wrap: wrap;
-    margin-top: 50px;
-    margin-right: 90px;
-    margin-bottom: 50px;
-    margin-left: 90px;
-    background-color: rgb(255, 255, 255);
+    /* 折り返しを有効にする */
+    justify-content: center;
+    /* 横方向の中央揃え */
+    align-items: center;
+    /* 縦方向の中央揃え（アイテム全体の高さに基づく） */
+    gap: 50px;
+    margin-bottom: 90px;
+    /* アイテム間の間隔を設定 */
 }
 
-/* 商品アイテム */
 .product-item {
+    position: relative;
     background-color: #a0a0a0;
     min-width: 380px;
-    min-height: 380px;
-    margin-bottom: 25px;
-    /* 固定のサイズ */
+    max-width: 380px;
+    box-sizing: border-box;
+    /* パディングを含めた幅を調整 */
+    margin-top: 40px;
+    margin-bottom: -40px;
+    /* 下部マージン */
 }
 
 .product-item img {
     width: 100%;
+    /* アイテム内で画像を親要素の幅に合わせる */
     height: auto;
+    /* 縦横比を維持 */
     object-fit: cover;
 }
 
 .product-item p {
-    font-size: 14px;
-    margin: 5px 0;
+    position: absolute;
+    /* 絶対位置 */
+    margin-left: 10px;
+    margin-top: -50px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: rgba(120, 120, 120, 0.8);
+    color: #fff;
 }

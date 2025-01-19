@@ -1,11 +1,9 @@
-/* 全体のリセット */
 html,
 body {
     margin: 0;
     padding: 0;
 }
 
-/* ヘッダーの設定 */
 .header {
     background-color: black;
     max-width: 100%;
@@ -14,12 +12,107 @@ body {
 
 .header__inner {
     padding-top: 19px;
+    display: flex;
 }
 
-.header__inner img {
+.header__logo img {
+    float: left;
+    max-width: 370px;
+    height: 42px;
+}
+
+.header__inner a {
     padding-left: 25px;
     max-width: 370px;
     height: 42px;
+}
+
+/* 検索バーのスタイル */
+.search-bar {
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    /* 検索バーを中央に広げる */
+    margin: 0 60px;
+}
+
+.search-input {
+    margin: 0 auto;
+    width: 500px;
+    padding: 10px 25px;
+    border-radius: 5px;
+    border: #fff solid 1px;
+    background-color: #fff;
+    color: white;
+    font-size: 17px;
+}
+
+.search-input::placeholder {
+    color: #000000;
+    font-size: 17.5px;
+}
+
+/* ナビゲーションメニューのスタイル */
+.nav {
+    display: flex;
+    /* 横並びにする */
+    align-items: center;
+    /* アイテムを縦方向に中央揃え */
+    justify-content: flex-end;
+    /* 右端に配置 */
+    padding-right: 27px;
+}
+
+.nav__link__login {
+    padding: 10px 30px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__register {
+    padding: 10px 30px;
+    margin-right: 70px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__logout {
+    padding: 10px 30px;
+    margin-right: 10px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__mypage {
+    padding: 10px 30px;
+    margin-right: 50px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* 出品リンクのスタイル */
+.nav__link__sell {
+    color: #000000;
+    background-color: #fff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 23px;
+    font-size: 17px;
+    border-radius: 5px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link:hover {
+    text-decoration: underline;
 }
 
 /* セクションタイトルの中央配置 */

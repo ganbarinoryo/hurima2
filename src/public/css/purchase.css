@@ -1,11 +1,9 @@
-/* 基本スタイル */
 html,
 body {
     margin: 0;
     padding: 0;
 }
 
-/* ヘッダー */
 .header {
     background-color: black;
     max-width: 100%;
@@ -18,6 +16,7 @@ body {
 }
 
 .header__logo img {
+    float: left;
     max-width: 370px;
     height: 42px;
 }
@@ -32,6 +31,7 @@ body {
 .search-bar {
     flex-wrap: nowrap;
     flex-grow: 1;
+    /* 検索バーを中央に広げる */
     margin: 0 60px;
 }
 
@@ -51,17 +51,18 @@ body {
     font-size: 17.5px;
 }
 
-/* ナビゲーションメニュー */
+/* ナビゲーションメニューのスタイル */
 .nav {
     display: flex;
+    /* 横並びにする */
     align-items: center;
+    /* アイテムを縦方向に中央揃え */
     justify-content: flex-end;
+    /* 右端に配置 */
     padding-right: 27px;
 }
 
-/* ナビゲーションリンク */
-.nav__link__login,
-.nav__link__register {
+.nav__link__login {
     padding: 10px 30px;
     font-size: 17.5px;
     color: white;
@@ -70,49 +71,144 @@ body {
 }
 
 .nav__link__register {
+    padding: 10px 30px;
     margin-right: 70px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__logout {
+    padding: 10px 30px;
+    margin-right: 10px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__mypage {
+    padding: 10px 30px;
+    margin-right: 50px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 /* 出品リンクのスタイル */
 .nav__link__sell {
     color: #000000;
     background-color: #fff;
-    padding: 10px 20px 10px 23px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 23px;
     font-size: 17px;
     border-radius: 5px;
     text-decoration: none;
     white-space: nowrap;
 }
 
-/* リンクのホバー効果 */
 .nav__link:hover {
     text-decoration: underline;
 }
 
-
-
-/* メインのレイアウト */
+/* メインコンテンツ */
 main {
-    justify-content: center;
-    padding-top: 100px;
-    padding-bottom: 100px;
     display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    gap: 20px;
 }
 
-/* 商品アイテム */
-.item__image {
-    background-color: #a0a0a0;
-    min-width: 500px;
-    height: 500px;
-    margin-bottom: 25px;
-    /* 固定のサイズ */
+.left_side {
+    margin-top: 20px;
+    margin-right: 40px;
+    width: 550px;
 }
 
-/* 購入ボタンのレイアウト */
+.right_side {
+    width: 550px;
+    display: flex;
+    /* 追加: 右側をFlexboxコンテナにする */
+    flex-direction: column;
+    /* 追加: 縦方向に配置 */
+}
+
+.item_image {
+    width: 550px;
+    height: 550px;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    /* 画像を中央に配置 */
+}
+
+.item_image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* テーブル関連 */
+.item_information {
+    margin-top: 20px;
+    width: 550px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.item_table {
+    width: 550px;
+    border: 2px solid #ccc;
+    /* 外枠に境界線を追加 */
+    border-radius: 10px;
+    /* 外枠を丸くする */
+    overflow: hidden;
+    /* 内側のセルの角を丸くするために追加 */
+}
+
+.item_table th {
+    padding: 25px;
+    border: 1px solid #ccc;
+    /* セルの境界線 */
+    text-align: center;
+}
+
+.item_table td {
+    padding: 25px;
+    border: 1px solid #ccc;
+    /* セルの境界線 */
+    text-align: left;
+}
+
+.item_table th a {
+    display: block;
+    /* ブロック要素にする */
+    text-align: center;
+    /* 中央揃え */
+    margin: 10px auto 0;
+    /* 上マージンと左右のマージンを調整 */
+    text-decoration: none;
+    color: #3070ba;
+    font-size: 13px;
+}
+
+/* ボタン関連 */
+.form__button {
+    text-align: center;
+    margin-top: auto;
+    /* ボタンを最下部に配置 */
+}
+
 .form__button-submit {
-    width: 500px;
+    width: 550px;
     height: 57px;
-    padding: 13px;
     font-weight: bold;
     background: #FF5555;
     color: white;
@@ -122,53 +218,53 @@ main {
     cursor: pointer;
 }
 
-/* 商品説明レイアウト */
-.item__detail {
-    margin-top: -37px;
-    margin-left: 130px;
-    background-color: rgb(255, 255, 255);
-    min-width: 500px;
-    min-height: 100%;
-    font-size: 20px;
+.sold-out {
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
 }
 
-/* 説明文テキストエリア */
-.textarea--description {
-    margin-top: -20px;
-    width: 100%;
-    min-height: 125px;
-    border: 1px solid #5F5F5F;
-    /* 枠線 */
-    border-radius: 5px;
-    /* 角を丸める */
-    font-size: 16px;
-    /* テキストサイズ */
-    resize: vertical;
-    /* ユーザーが縦方向に調整可能 */
-}
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
 
-.item__category p {
-    background-color: #D9D9D9;
-    padding-top: 5px;
-    width: 100px;
-    text-align: center;
-    border-radius: 50px;
-    margin-left: 30px;
-}
+    .left_side,
+    .right_side {
+        width: 100%;
+    }
 
-.item__condition p {
-    padding-top: 5px;
-    width: 100px;
-    text-align: center;
-    border-radius: 50px;
-    margin-left: 30px;
-}
+    .item_image {
+        width: 100%;
+        height: 100%;
+        margin-bottom: 20px;
+        /* 下マージンを追加 */
+    }
 
-.item__category {
-    display: flex;
+    /* テーブル関連 */
+    .item_information {
+        margin-top: 20px;
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 50px;
+    }
 
-}
+    .item_table {
+        width: 100%;
+        border: 2px solid #ccc;
+        /* 外枠に境界線を追加 */
+        border-radius: 10px;
+        /* 外枠を丸くする */
+        overflow: hidden;
+        /* 内側のセルの角を丸くするために追加 */
+    }
 
-.item__condition {
-    display: flex;
+
+    .form__button-submit {
+        width: 100%;
+        /* スマホでボタンをフル幅にする */
+    }
 }

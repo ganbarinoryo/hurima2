@@ -51,17 +51,18 @@ body {
     font-size: 17.5px;
 }
 
-/* ナビゲーションメニュー */
+/* ナビゲーションメニューのスタイル */
 .nav {
     display: flex;
+    /* 横並びにする */
     align-items: center;
+    /* アイテムを縦方向に中央揃え */
     justify-content: flex-end;
+    /* 右端に配置 */
     padding-right: 27px;
 }
 
-/* ナビゲーションリンク */
-.nav__link__login,
-.nav__link__register {
+.nav__link__login {
     padding: 10px 30px;
     font-size: 17.5px;
     color: white;
@@ -70,14 +71,40 @@ body {
 }
 
 .nav__link__register {
+    padding: 10px 30px;
     margin-right: 70px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__logout {
+    padding: 10px 30px;
+    margin-right: 10px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav__link__mypage {
+    padding: 10px 30px;
+    margin-right: 50px;
+    font-size: 17.5px;
+    color: white;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 /* 出品リンクのスタイル */
 .nav__link__sell {
     color: #000000;
     background-color: #fff;
-    padding: 10px 20px 10px 23px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 23px;
     font-size: 17px;
     border-radius: 5px;
     text-decoration: none;
@@ -117,11 +144,235 @@ main {
     /* 固定のサイズ */
 }
 
-/* 購入ボタンのレイアウト */
-.form__button-submit {
+.item-container {
+    display: flex;
+    margin-top: -10px;
+}
+
+/*お気に入りボタンのデザイン*/
+.favorite-button-container {
+    /* ボタンを中央揃え */
+    margin: 20px 0;
+}
+
+.favorite-button {
+    font-size: 50px;
+    /* 星のサイズ */
+    color: #000000;
+    /* デフォルトの星の色 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.favorite-button.favorited {
+    color: #f39c12;
+    /* お気に入り時の星の色 (オレンジ) */
+}
+
+.favorite-button:hover {
+    color: #f1c40f;
+    /* ホバー時の星の色 */
+    transform: scale(1.1);
+    /* 少し拡大する */
+}
+
+.favorite-count {
+    margin-top: -5px;
+    margin-left: 25px;
+}
+
+/* コメントボタンのデザイン */
+.comment-container {
+    margin-top: 13px;
+    display: inline-block;
+    /* 横並びに対応 */
+}
+
+.comment-button {
+    width: 90px;
+    height: 90px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.comment-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* ホバー時のエフェクト */
+.comment-button:hover {
+    transform: scale(1.1);
+    /* 少し拡大する */
+}
+
+.comment-count {
+    margin-top: -19.5px;
+    margin-left: 38px;
+}
+
+
+
+
+/* コメント欄全体のスタイル */
+.comment-area {
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: -78px;
+    margin-top: 10px;
+    width: 540px;
+    max-width: 540px;
+    height: 700px;
+    /* コメント欄のサイズとスタイル */
+    position: relative;
+    /* 子要素を絶対位置で配置する基準にする */
+}
+
+/* メッセージを表示する領域 */
+.message-container {
+    max-height: 800px;
+    /* 高さの最大値を設定 */
+    overflow-y: auto;
+    /* 縦方向にコンテンツがあふれた場合にスクロールを許可 */
+    padding: 10px 0;
+    /* 上下の余白 */
+    margin-bottom: 10px;
+    /* 下側の余白 */
+}
+
+
+
+
+
+
+/* 自分のコメント */
+.my-message {
+    align-items: flex-end;
+    /* 右寄せ */
+    text-align: left;
+    margin-right: 40px !important;
+}
+
+.my-message p {
+    background-color: #dff9fb;
+    /* 水色の吹き出し */
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    margin-right: 10px !important;
+}
+
+/* 他のユーザーのコメント */
+.other-message {
+    align-items: flex-start;
+    /* 左寄せ */
+    text-align: left;
+}
+
+/* 他のユーザーのコメントヘッダーの設定 */
+.other-message .comment_header {
+    flex-direction: row-reverse;
+    /* 名前とアイコンの順序を逆に */
+}
+
+/* 名前とアイコンの間の余白を調整 */
+.other-message .user-name {
+    margin-left: 5px;
+    /* 左側に余白 */
+    margin-right: 0;
+    /* 右側の余白をリセット */
+}
+
+.other-message .user-icon {
+    margin-left: 0;
+    /* 左側の余白をリセット */
+    margin-right: 5px;
+    /* 右側に余白 */
+}
+
+.other-message p {
+    background-color: #d1daff;
+    /* 灰色の吹き出し */
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    max-width: 85%;
+}
+
+/*ここから*/
+.comment {
+    width: 100%;
+    /* 親要素に合わせて幅を調整 */
+    margin-bottom: 10px;
+    display: flex;
+    /* Flexboxを使用 */
+    flex-direction: column;
+    /* 縦方向に並べる */
+}
+
+.comment p {
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 15px;
+    display: inline-block;
+    margin: 5px 0;
+    /* 吹き出し型のデザイン */
+}
+
+.comment_header {
+    display: flex;
+    align-items: center;
+    margin-right: 13px;
+}
+
+.user-icon {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.user-name {
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+/* コメント入力エリア全体のスタイル */
+.comment-input-area {
+    margin-top: 30px;
+    /* 入力欄とボタンの横並びレイアウト */
+}
+
+/* コメント入力テキストエリアのスタイル */
+.comment-input-area textarea {
+    margin-top: -20px;
+    flex: 1;
+    width: 500px;
+    height: 150px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    /* 入力欄のデザイン */
+}
+
+.comment_send_button {
     width: 500px;
     height: 57px;
-    padding: 13px;
     font-weight: bold;
     background: #FF5555;
     color: white;
@@ -129,6 +380,32 @@ main {
     border: 1px solid #FF5555;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 50px;
+}
+
+/* 購入ボタンのレイアウト */
+.form__button-submit {
+    width: 500px;
+    height: 57px;
+    font-weight: bold;
+    background: #FF5555;
+    color: white;
+    font-size: 26px;
+    border: 1px solid #FF5555;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form__button a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.form__button-submit.disabled {
+    background-color: grey !important;
+    border: 1px solid gray !important;
+    color: white !important;
+    cursor: not-allowed !important;
 }
 
 /* 商品説明レイアウト */
