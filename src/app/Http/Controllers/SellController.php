@@ -23,7 +23,7 @@ class SellController extends Controller
             'category'    => 'required|max:255',
             'condition'   => 'required|max:255',
             'price'       => 'required|numeric|min:1',
-            'item_image'  => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB制限
+            'item_image'  => 'required|image|mimes:jpeg,png,jpg,gif|max:10240', // 10MB制限
         ]);
 
         // itemsテーブルにデータを保存

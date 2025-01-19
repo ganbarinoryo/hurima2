@@ -28,7 +28,7 @@ class ProfileController extends Controller
             'postal_code' => 'required|regex:/\d{3}-\d{4}/',
             'address' => 'required|max:255',
             'building_name' => 'nullable|max:255',
-            'user_icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'user_icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
         ]);
 
         // 現在ログイン中のユーザーを取得
