@@ -62,6 +62,7 @@
                 ☆
             </button>
         </div>
+
 <!--コメント欄-->
         <div class="comment-container">
             <button id="comment-button" class="comment-button">
@@ -80,7 +81,8 @@
 
     </div>
 
-<!--購入するボタン-->
+<div class="item-detail-container">
+    <!--購入するボタン-->
         <div class="form__button">
             @if ($item->status === '売却済')
                 <button class="form__button-submit disabled" disabled>売却済</button>
@@ -116,6 +118,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 </main>
@@ -160,103 +163,110 @@
     });
 </script>
 
-<!--コメント欄表示・非表示・送受信-->
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // 各要素を取得
-        const commentButton = document.getElementById('comment-button');
-        const commentArea = document.getElementById('comment-area');
-        const commentsContainer = document.getElementById('comments');
-        const commentInput = document.getElementById('comment-input');
-        const commentSubmit = document.getElementById('comment-submit');
-        const itemData = document.querySelector('.item_data');
-        const itemId = {{ $item->id }};  // BladeでitemIdを取得
+document.addEventListener('DOMContentLoaded', () => {
+    // 各要素を取得
+    const commentButton = document.getElementById('comment-button');
+    const commentArea = document.getElementById('comment-area');
+    const commentsContainer = document.getElementById('comments');
+    const commentInput = document.getElementById('comment-input');
+    const commentSubmit = document.getElementById('comment-submit');
+    const itemDetails = document.querySelector('.item-detail-container'); // 購入ボタンや商品の状態部分をラップした要素
 
-        // 初期表示状態を設定
-        commentArea.style.display = 'none';
-        itemData.style.display = 'block';
+    // itemIdを安全に取得
+    const itemId = @json($item->id);
 
-        // コメントボタンクリック時の処理
+    // 初期表示状態の設定
+    if (commentArea) commentArea.style.display = 'none';
+    if (itemDetails) itemDetails.style.display = 'block';
+
+    // コメントボタンクリック時の表示切り替え
+    if (commentButton) {
         commentButton.addEventListener('click', () => {
-            if (commentArea.style.display === 'none' || commentArea.style.display === '') {
-                commentArea.style.display = 'block';
-                itemData.style.display = 'none';
-                loadComments(itemId);  // コメントのロード
-            } else {
-                commentArea.style.display = 'none';
-                itemData.style.display = 'block';
-            }
+            const isCommentAreaVisible = commentArea.style.display === 'block';
+            commentArea.style.display = isCommentAreaVisible ? 'none' : 'block';
+            if (itemDetails) itemDetails.style.display = isCommentAreaVisible ? 'block' : 'none';
+
+            // コメント欄を表示した際にコメントをロード
+            if (!isCommentAreaVisible) loadComments(itemId);
         });
+    }
 
-        // コメントを読み込む関数
-        function loadComments(itemId) {
+    // コメントを読み込む関数
+    async function loadComments(itemId) {
+        try {
             commentsContainer.innerHTML = '<p>Loading...</p>';
+            const response = await fetch(`/items/${itemId}/comments`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-            fetch(`/items/${itemId}/comments`)
-                .then(response => response.json())
-                .then(comments => {
-                    commentsContainer.innerHTML = '';
-                    comments.forEach(comment => {
-                        addCommentToDOM(comment);  // コメントを表示する関数
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching comments:', error);
-                    commentsContainer.innerHTML = '<p>コメントの取得に失敗しました。</p>';
-                });
+            const comments = await response.json();
+            commentsContainer.innerHTML = '';
+            comments.forEach(comment => addCommentToDOM(comment));
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+            commentsContainer.innerHTML = '<p>コメントの取得に失敗しました。</p>';
         }
+    }
 
-        // コメントをDOMに追加する関数
-        function addCommentToDOM(comment) {
-            const commentDiv = document.createElement('div');
-            commentDiv.classList.add('comment');
+    // コメントをDOMに追加する関数
+    function addCommentToDOM(comment) {
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
 
-            const commentHeader = document.createElement('div');
-            commentHeader.classList.add('comment_header');
+        // ヘッダー（ユーザー名とアイコン）
+        const commentHeader = document.createElement('div');
+        commentHeader.classList.add('comment_header');
 
-            const userName = document.createElement('span');
-            userName.textContent = comment.user.name;
-            userName.classList.add('user-name');
+        const userName = document.createElement('span');
+        userName.textContent = comment.user?.name || '匿名ユーザー';
+        userName.classList.add('user-name');
 
-            // アイコンURLの設定
-            const userIcon = document.createElement('img');
-            userIcon.src = comment.user.icon_url || '/default-icon.png';  // アイコンURLがない場合はデフォルトアイコンを表示
-            userIcon.alt = 'User Icon';
-            userIcon.classList.add('user-icon');
+        const userIcon = document.createElement('img');
+        userIcon.src = comment.user?.icon_url || '/default-icon.png';
+        userIcon.alt = 'User Icon';
+        userIcon.classList.add('user-icon');
 
-            commentHeader.appendChild(userName);
-            commentHeader.appendChild(userIcon);
+        commentHeader.appendChild(userName);
+        commentHeader.appendChild(userIcon);
 
-            const commentBody = document.createElement('div');
-            commentBody.classList.add('comment_body');
-            commentBody.innerHTML = `<p>${comment.comment}</p>`;  // コメント本文
+        // コメント本文
+        const commentBody = document.createElement('div');
+        commentBody.classList.add('comment_body');
+        commentBody.innerHTML = `<p>${comment.comment}</p>`;
 
-            commentDiv.appendChild(commentHeader);
-            commentDiv.appendChild(commentBody);
-            commentsContainer.appendChild(commentDiv);  // コメントを表示
-        }
+        commentDiv.appendChild(commentHeader);
+        commentDiv.appendChild(commentBody);
+        commentsContainer.appendChild(commentDiv);
+    }
 
-        // コメント送信ボタンクリック時の処理
-        commentSubmit.addEventListener('click', () => {
+    // コメント送信処理
+    if (commentSubmit) {
+        commentSubmit.addEventListener('click', async () => {
             const commentText = commentInput.value.trim();
             if (!commentText) return;
 
-            fetch(`/items/${itemId}/comments`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ comment: commentText })  // 入力されたコメントを送信
-            })
-                .then(response => response.json())
-                .then(data => {
-                    addCommentToDOM(data);  // 送信したコメントをDOMに追加
-                    commentInput.value = '';  // コメント入力欄をクリア
-                })
-                .catch(error => console.error('Error posting comment:', error));
+            try {
+                const response = await fetch(`/items/${itemId}/comments`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ comment: commentText })
+                });
+
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                const data = await response.json();
+                addCommentToDOM(data); // 送信したコメントをDOMに追加
+                commentInput.value = ''; // 入力欄をクリア
+            } catch (error) {
+                console.error('Error posting comment:', error);
+                alert('コメントの送信に失敗しました。もう一度お試しください。');
+            }
         });
-    });
+    }
+});
 </script>
 
 

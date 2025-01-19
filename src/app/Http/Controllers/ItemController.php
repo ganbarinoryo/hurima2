@@ -17,6 +17,9 @@ class ItemController extends Controller
             return abort(404, '商品が見つかりません');
         }
 
+        // ログインユーザーがその商品をお気に入り登録しているか判定
+        $item->is_favorited = $item->favoritedBy->contains(auth()->user());
+
         return view('item', compact('item'));
     }
 
