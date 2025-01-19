@@ -46,12 +46,29 @@ class User extends Authenticatable
 
     public function favorites()
     {
-        return $this->belongsToMany(Item::class, 'favorites')->withTimestamps();
+        return $this->belongsToMany(Item::class, 'favorites', 'user_id', 'item_id');
     }
 
     // コメントとのリレーション
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class); // 購入履歴とのリレーション
+    }
+
+    public function purchasedItems()
+    {
+        return $this->hasManyThrough(
+            Item::class, // 取得対象のモデル
+            Purchase::class, // 経由するモデル
+            'user_id', // PurchaseテーブルでUserを識別する外部キー
+            'id', // ItemテーブルでItemを識別するキー
+            'id', // UserテーブルでUserを識別するキー
+            'item_id' // PurchaseテーブルでItemを識別する外部キー
+        );
     }
 }

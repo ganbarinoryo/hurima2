@@ -12,7 +12,8 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 // トップページ
-Route::get('/', [TopController::class, 'top']);
+Route::get('/', [TopController::class, 'top'])->name('top');
+Route::get('/favorites', [TopController::class, 'favorites'])->name('favorites');
 
 // ログイン関連
 Route::get('/login', [AuthController::class, 'login'])->name('login'); // ログインページ表示
@@ -28,12 +29,12 @@ Route::middleware('auth')->group(function () {
 
     // マイページ関連
     Route::get('/mypage', [MypageController::class, 'mypage'])->name('mypage');
+    Route::get('/mypage/selling', [MypageController::class, 'selling'])->name('mypage.selling');
+    Route::get('/mypage/purchased', [MypageController::class, 'purchased'])->name('mypage.purchased');
 
     // プロフィール表示と更新ルート
     Route::get('/mypage/profile', [ProfileController::class, 'profile'])->name('profile');
     Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
-
-
 
     // 出品関連
     Route::get('/sell', [SellController::class, 'sell'])->name('sell.show'); // 出品フォーム
@@ -41,6 +42,8 @@ Route::middleware('auth')->group(function () {
 
     // 購入履歴
     Route::get('/purchase/{id}', [PurchaseController::class, 'purchase'])->name('purchase.show'); // 購入履歴表示
+    //購入処理
+    Route::post('/purchase/{id}', [PurchaseController::class, 'store'])->name('purchase.store');
 
     // コメント関連
     Route::get('/items/{id}/comments', [CommentController::class, 'getComments']); // コメント取得

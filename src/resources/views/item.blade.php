@@ -81,12 +81,17 @@
     </div>
 
 <!--購入するボタン-->
-    <div class="item_data">
         <div class="form__button">
-            <button class="form__button-submit" type="submit">
-                <a href="{{ route('purchase.show', ['id' => $item->id]) }}">購入する</a>
-            </button>
+            @if ($item->status === '売却済')
+                <button class="form__button-submit disabled" disabled>売却済</button>
+            @else
+                <form action="{{ route('purchase.store', ['id' => $item->id]) }}" method="POST">
+                    @csrf
+                    <button class="form__button-submit">購入する</button>
+                </form>
+            @endif
         </div>
+
 
         <h2>商品説明</h2>
         <div class="form__input--description">

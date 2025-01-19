@@ -218,6 +218,12 @@ main {
     cursor: pointer;
 }
 
+.sold-out {
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     main {

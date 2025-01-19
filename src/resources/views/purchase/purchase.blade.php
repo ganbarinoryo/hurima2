@@ -73,9 +73,13 @@
 
             </div>
 
-            <div class="form__button">
-                <button class="form__button-submit" type="submit">購入する</button>
-            </div>
+                <form action="{{ route('purchase.store', ['id' => $item->id]) }}" method="POST">
+                    @csrf
+                    <div class="form__button">
+                        <button class="form__button-submit" type="submit">購入する</button>
+                    </div>
+                </form>
+
         </div>
     </main>
 </body>

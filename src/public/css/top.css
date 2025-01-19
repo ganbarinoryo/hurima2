@@ -119,6 +119,7 @@ body {
 .tabs {
     display: flex;
     width: 100%;
+    padding-left: 15px;
     padding-top: 50px;
     padding-bottom: 10px;
     border-bottom: 2px solid #5F5F5F;
@@ -126,7 +127,6 @@ body {
 
 .tab.active {
     color: #ff5555;
-    padding-left: 125px;
 }
 
 .tab {
@@ -146,18 +146,18 @@ body {
     align-items: center;
     /* 縦方向の中央揃え（アイテム全体の高さに基づく） */
     gap: 50px;
-    padding-bottom: 50px;
-    /* アイテム間の間隔を設定 */
 }
 
 .product-item {
+    position: relative;
+    /* 売却済ラベルの位置を親要素に基づくように設定 */
     background-color: #a0a0a0;
     min-width: 380px;
     max-width: 380px;
     box-sizing: border-box;
     /* パディングを含めた幅を調整 */
     margin-top: 40px;
-    /* 下部マージン */
+    margin-bottom: -40px;
 }
 
 .product-item img {
@@ -177,4 +177,28 @@ body {
     border-radius: 20px;
     background-color: rgba(120, 120, 120, 0.8);
     color: #fff;
+}
+
+.product-item .sold-label {
+    position: absolute;
+    top: 50%;
+    /* 親要素の縦中央 */
+    left: 50%;
+    /* 親要素の横中央 */
+    transform: translate(-50%, -50%);
+    /* 中央に配置 */
+    background-color: rgba(255, 50, 50, 0.9);
+    /* 背景に半透明の黒色 */
+    color: white;
+    /* 文字色を白に設定 */
+    padding: 15px 25px;
+    /* ラベルの内側余白 */
+    font-size: 30px;
+    /* 文字サイズ */
+    font-weight: bold;
+    /* 太字に設定 */
+    border-radius: 5px;
+    /* 角を丸くする */
+    z-index: 10;
+    /* 他の要素より前に表示 */
 }

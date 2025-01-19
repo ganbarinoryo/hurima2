@@ -337,6 +337,13 @@ main {
     color: #fff;
 }
 
+.form__button-submit.disabled {
+    background-color: grey !important;
+    border: 1px solid gray !important;
+    color: white !important;
+    cursor: not-allowed !important;
+}
+
 /* 商品説明レイアウト */
 .item__detail {
     margin-top: -37px;
