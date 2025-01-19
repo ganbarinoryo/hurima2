@@ -7,7 +7,7 @@
 このフリマサイトには以下の主な機能があります：
 
 - **会員登録**
-  ![alt 会員登録ページ](register/png)
+  ![alt 会員登録ページ](public/images/register/png)
 
 - **ログイン / ログアウト**
 
