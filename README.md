@@ -28,7 +28,7 @@
   ![ユーザー購入](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/purchase.png)
 
 - **ユーザ出品商品一覧取得**
-  ![ユーザー出品一覧](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/.png)
+  ![ユーザー出品一覧](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/sells.png)
 
 - **プロフィール変更**
   ![プロフ変更](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/profile.png)
