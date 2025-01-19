@@ -7,7 +7,7 @@
 このフリマサイトには以下の主な機能があります：
 
 - **会員登録**
-
+  ![会員登録](https://github.com/ganbarinoryo/main/raw/main/src/public/images/register.png)
 
 - **ログイン / ログアウト**
 
