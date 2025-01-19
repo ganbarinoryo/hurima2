@@ -1,5 +1,7 @@
 # coachtech フリマ
 
+![商品一覧](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/top.png)
+
 「coachtech フリマ」は、ある企業が開発した独自のフリマアプリで、coachtech ブランドのアイテムを出品するために製作されたアプリです。
 
 ## 機能
@@ -191,6 +193,5 @@
     ぜひページを覗いてみてください。
 
     ・メールアドレス　yamadasa@gmail.com
-    
+
     ・パスワード　yamadasaburou
-    
