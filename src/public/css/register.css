@@ -44,11 +44,15 @@ body {
 }
 
 .form__group {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .form__group-content {
-    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.form__group-content h2 {
+    padding-top: 4px;
 }
 
 .form__error {
@@ -58,8 +62,7 @@ body {
 }
 
 .form__input--text input {
-    margin-top: -20px;
-    padding: 10px;
+    margin-top: -12px;
     width: 680px;
     height: 60px;
     border: 1px solid #5F5F5F;
@@ -69,7 +72,7 @@ body {
 }
 
 .form__button {
-    padding-top: 55px;
+    padding-top: 50px;
 }
 
 .form__button-submit {

@@ -28,7 +28,7 @@ class AuthController extends Controller
         // 認証処理
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // ログイン成功
-            return redirect()->route('mypage');  // ログイン後、プロフィールページにリダイレクト
+            return redirect()->route('top');  // ログイン後、プロフィールページにリダイレクト
         }
 
         // ログイン失敗
@@ -70,6 +70,6 @@ class AuthController extends Controller
     $request->session()->regenerateToken();
 
     // ログインページへリダイレクト
-    return redirect()->route('login');
+    return redirect()->route('top');
 }
 }

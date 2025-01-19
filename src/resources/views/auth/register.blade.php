@@ -28,7 +28,7 @@
 
     <div class="form__group">
         <div class="form__group-content">
-            <p>メールアドレス</p>
+            <h2>メールアドレス</h2>
             <div class="form__input--text">
                 <input type="text" name="email" value="{{ old('email') }}" class="@error('email') is-invalid @enderror"/>
             </div>
@@ -42,7 +42,7 @@
 
     <div class="form__group">
         <div class="form__group-content">
-            <p>パスワード</p>
+            <h2>パスワード</h2>
             <div class="form__input--text">
                 <input type="password" name="password" value="{{ old('password') }}" class="@error('password') is-invalid @enderror"/>
             </div>
