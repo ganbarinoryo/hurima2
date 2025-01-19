@@ -61,6 +61,7 @@
             <button class="favorite-button {{ $item->is_favorited ? 'favorited' : '' }}" data-item-id="{{ $item->id }}">
                 ☆
             </button>
+            <p class="favorite-count">{{ $favoriteCount }}</p> <!-- お気に入り数を表示 -->
         </div>
 
 <!--コメント欄-->
@@ -68,6 +69,7 @@
             <button id="comment-button" class="comment-button">
                 <img src="{{ asset('images/hukidashi.png') }}" alt="ふきだし">
             </button>
+            <p class="comment-count">{{ $commentCount }}</p> <!-- コメント数を表示 -->
             <div id="comment-area" class="comment-area" style="display: none;">
                 <div id="comments" class="message-container">
                     <!-- コメントを動的に挿入 -->
@@ -78,8 +80,8 @@
                 </div>
             </div>
         </div>
-
     </div>
+
 
 <div class="item-detail-container">
     <!--購入するボタン-->

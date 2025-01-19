@@ -54,6 +54,16 @@ class Item extends Model
         return $this->belongsToMany(User::class, 'favorites', 'item_id', 'user_id');
     }
 
+    public function favoriteCount()
+    {
+        return $this->favoritedBy()->count();
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'item_id');
+    }
+
     public function purchases()
     {
         return $this->hasMany(Purchase::class); // Purchaseモデルとリレーション

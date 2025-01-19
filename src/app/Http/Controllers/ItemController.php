@@ -17,10 +17,16 @@ class ItemController extends Controller
             return abort(404, '商品が見つかりません');
         }
 
+        // お気に入り数を取得
+        $favoriteCount = $item->favoriteCount();
+
+        // コメント数を取得
+        $commentCount = Comment::where('item_id', $id)->count();
+
         // ログインユーザーがその商品をお気に入り登録しているか判定
         $item->is_favorited = $item->favoritedBy->contains(auth()->user());
 
-        return view('item', compact('item'));
+        return view('item', compact('item', 'favoriteCount', 'commentCount'));
     }
 
     public function toggle($id)

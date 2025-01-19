@@ -178,6 +178,11 @@ main {
     /* 少し拡大する */
 }
 
+.favorite-count {
+    margin-top: -5px;
+    margin-left: 25px;
+}
+
 /* コメントボタンのデザイン */
 .comment-container {
     margin-top: 13px;
@@ -205,6 +210,11 @@ main {
 .comment-button:hover {
     transform: scale(1.1);
     /* 少し拡大する */
+}
+
+.comment-count {
+    margin-top: -19.5px;
+    margin-left: 38px;
 }
 
 
