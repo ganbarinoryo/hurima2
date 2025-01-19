@@ -8,6 +8,6 @@ class AddressController extends Controller
 {
     public function address()
     {
-        return view("address");
+        return view("purchase.address");
     }
 }

@@ -27,7 +27,7 @@
                     <a href="/login" class="nav__link__login">ログイン</a>
                     <a href="/register" class="nav__link__register">会員登録</a>
                 @else
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="#" class="nav__logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         ログアウト
                     </a>
                     <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
@@ -49,7 +49,7 @@
     <div class="user_data">
     <!-- ユーザーアイコン -->
         <div class="user_icon">
-            <img src="{{ asset('storage/images/' . Auth::user()->user_icon) }}" alt="ユーザーアイコン">
+            <img src="{{ asset('storage/' . $user->user_icon) }}" alt="ユーザーアイコン">
         </div>
     
     <!-- ユーザー名 -->
@@ -63,33 +63,35 @@
     </div>
 </div>
 
+    @php
+        $activeTab = $activeTab ?? 'selling';
+    @endphp
 
+    <section class="tabs">
+       <a class="tab {{ $activeTab === 'selling' ? 'active' : '' }}" href="{{ route('mypage.selling') }}">出品した商品</a>
+        <a class="tab {{ $activeTab === 'purchased' ? 'active' : '' }}" href="{{ route('mypage.purchased') }}">購入した商品</a>
+    </section>
 
-        <section class="tabs">
-            <a class="tab active" href="">おすすめ</a>
-            <a class="tab" href="">マイリスト</a>
-        </section>
+    <section class="products">
+        @foreach ($items as $item)
+            <div class="product-item">
+                <!-- 商品ページへのリンク -->
+                <a href="{{ route('item.show', ['id' => $item->id]) }}">
+                    <!-- 商品画像 -->
+                    <img 
+                        src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" 
+                        alt="商品画像">
+                </a>
+                <!-- 価格 -->
+                <p>¥{{ number_format($item->price) }}</p>
+            </div>
+        @endforeach
 
-        <section class="products">
-            @foreach ($items as $item)
-                <div class="product-item">
-                    <!-- 商品ページへのリンク -->
-                    <a href="{{ route('item.show', ['id' => $item->id]) }}">
-                        <!-- 商品画像 -->
-                        <img 
-                            src="{{ asset('storage/images/' . ($item->images->first()->image_url ?? 'default.png')) }}" 
-                            alt="商品画像">
-                    </a>
-                    <!-- 価格 -->
-                    <p>¥{{ number_format($item->price) }}</p>
-                </div>
-            @endforeach
-
-            <!-- 商品が存在しない場合のメッセージ -->
-            @if ($items->isEmpty())
-                <p>商品が見つかりません。</p>
-            @endif
-        </section>
+        <!-- 商品が存在しない場合のメッセージ -->
+        @if ($items->isEmpty())
+            <p>商品が見つかりません。</p>
+        @endif
+    </section>
     
 </body>
 </html>
