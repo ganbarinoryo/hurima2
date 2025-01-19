@@ -9,38 +9,63 @@
 - **会員登録**
   ![会員登録](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/register.png)
 
+  ヘッダーの会員登録より遷移します。
+  初めはメールアドレスとパスワードのみで会員登録を行い、別ページより個人情報の登録を行います。
+
 - **ログイン / ログアウト**
   ![ログイン](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/login.png)
+
+  ヘッダーのログインより遷移します。会員登録と同じくメールアドレスとパスワードのみ入力し、ログイン完了となります。
 
 - **商品一覧取得**
   ![商品一覧](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/top.png)
 
+  トップページのおすすめタブで、登録されたおすすめの商品を見られます。各商品のイメージ画像から商品詳細ページへ遷移できます。
+
 - **商品詳細取得**
   ![商品詳細](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/item.png)
+
+  商品画像のイメージ画像をクリックすることで遷移できます。商品に関しての情報を知ることができ、気に入ったものは購入するボタンより購入画面に進みます。
 
 - **商品お気に入り一覧取得**
   ![お気に入り一覧](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/favorites.png)
 
+  トップページのマイリストタブより、自分がお気に入りに登録した商品を見ることができます。
+
 - **ユーザー情報取得**
   ![ユーザー情報](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/user_page.png)
+
+  ログイン後、ヘッダーのマイページより遷移します。ユーザー名やユーザーアイコンが表示されています。プロフィール変更ページなどに遷移できます。
 
 - **ユーザー購入商品一覧取得**
   ![ユーザー購入](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/purchase.png)
 
+  購入した商品タブより、自分が購入した商品を確認できます。
+
 - **ユーザ出品商品一覧取得**
   ![ユーザー出品一覧](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/sells.png)
+
+  出品した商品タグより、自分が出品した商品を確認できます。
 
 - **プロフィール変更**
   ![プロフ変更](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/profile.png)
 
+  プロフィール変更ボタンより遷移します。このページでユーザーアイコン・ユーザー名・住所などの登録を行います。
+
 - **商品お気に入り追加 / 削除**
   ![お気に入り追加](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/favorite.png)
+
+  商品詳細ページの星マークをクリックすることで、お気に入り商品に登録できます。お気に入りに追加した商品はマイリストで確認できます。
 
 - **商品コメント追加 / 削除**
   ![コメント](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/comment.png)
 
+  商品詳細ページのふきだしマークをクリックすルことで、商品にコメントを送信できます。気になる商品について、出品者に問い合わせてみましょう。
+
 - **商品出品**
   ![商品出品](https://github.com/ganbarinoryo/hurima2/raw/main/src/public/images/sell.png)
+
+  ヘッダー右の出品ボタンより遷移します。画像や商品の状態を登録して出品作業ができます。
 
 ## 環境
 
@@ -159,3 +184,13 @@
         && composer self-update
 
     WORKDIR /var/www
+
+## デモアカウントについて
+
+    以下のメールアドレスとパスワードでログインできます。
+    ぜひページを覗いてみてください。
+
+    ・メールアドレス　yamadasa@gmail.com
+    
+    ・パスワード　yamadasaburou
+    
