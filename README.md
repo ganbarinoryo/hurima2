@@ -192,6 +192,12 @@
     以下のメールアドレスとパスワードでログインできます。
     ぜひページを覗いてみてください。
 
-    ・メールアドレス　yamadasa@gmail.com
+    山田三郎
 
+    ・メールアドレス　yamadasa@gmail.com
     ・パスワード　yamadasaburou
+
+    山田二郎
+
+    ・メールアドレス　yamadazi@gmail.com
+    ・パスワード　yamadazirou

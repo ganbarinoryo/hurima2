@@ -193,7 +193,7 @@ body {
 
 /* プロフィール編集ボタンにホバーした時のスタイル */
 .profile_edit .edit_button:hover {
-    background-color: #0056b3;
+    background-color: #ff9c9c;
     /* ホバー時の背景色 */
 }
 
