@@ -11,7 +11,7 @@
 
     <header class="header">
         <div class="header__inner">
-            <a class="header__logo" href="">
+            <a class="header__logo" href="/">
                 <img src="{{ asset('images/logo.png') }}" alt="コーチテック" >
             </a>
         </div>
