@@ -232,17 +232,19 @@ body {
     align-items: center;
     /* 縦方向の中央揃え（アイテム全体の高さに基づく） */
     gap: 50px;
-    padding-bottom: 50px;
+    margin-bottom: 90px;
     /* アイテム間の間隔を設定 */
 }
 
 .product-item {
+    position: relative;
     background-color: #a0a0a0;
     min-width: 380px;
     max-width: 380px;
     box-sizing: border-box;
     /* パディングを含めた幅を調整 */
     margin-top: 40px;
+    margin-bottom: -40px;
     /* 下部マージン */
 }
 

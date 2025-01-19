@@ -138,7 +138,6 @@ body {
 }
 
 .products {
-    margin-bottom: 90px;
     display: flex;
     flex-wrap: wrap;
     /* 折り返しを有効にする */
@@ -147,6 +146,7 @@ body {
     align-items: center;
     /* 縦方向の中央揃え（アイテム全体の高さに基づく） */
     gap: 50px;
+    margin-bottom: 90px;
 }
 
 .product-item {
