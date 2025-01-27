@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserFactory extends Factory
 {
@@ -14,12 +15,18 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $this->faker = \Faker\Factory::create('ja_JP');
+
         return [
-            'name' => $this->faker->name(),
+            'user_name' => $this->faker->name('ja_JP'), // 日本名
+            'user_icon' => $this->faker->imageUrl(100, 100, 'people'), // アイコン画像のURL
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'password' => Hash::make('123456789'), // 固定パスワード
+            'postal_code' => $this->faker->postcode(),
+            'address' => $this->faker->address(),
+            'building_name' => $this->faker->secondaryAddress(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 

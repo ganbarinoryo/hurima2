@@ -10,10 +10,14 @@ class Comment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'comments';
+
     protected $fillable = [
         'user_id',
         'item_id',
         'comment',
+        'created_at',
+        'updated_at',
     ];
 
     // ユーザーとのリレーション
