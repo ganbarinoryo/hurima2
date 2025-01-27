@@ -113,6 +113,10 @@
    DB_USERNAME=laravel_user
    DB_PASSWORD=laravel_pass
 
+   その後、下記のコマンドを実行してください。
+
+   php artisan key:generate
+
 5. マイグレーションを実行して、データベースを作成します。
 
    docker-compose exec app php artisan migrate
@@ -122,6 +126,14 @@
    docker-compose exec app php artisan serve
 
    サイトにアクセスするには、http://localhost:8000 にブラウザでアクセスしてください。
+
+## シーダーファイルの作成について
+
+下記のコマンドを docker の php コンテナで実行してください。
+
+php artisan db:seed
+
+シーダーファイル生成の設定で、password は共通で"123456789"になるように設定、それ以外は自動生成されます。
 
 ## php.ini 設定
 
@@ -186,18 +198,3 @@
         && composer self-update
 
     WORKDIR /var/www
-
-## デモアカウントについて
-
-    以下のメールアドレスとパスワードでログインできます。
-    ぜひページを覗いてみてください。
-
-    山田三郎
-
-    ・メールアドレス　yamadasa@gmail.com
-    ・パスワード　yamadasaburou
-
-    山田二郎
-
-    ・メールアドレス　yamadazi@gmail.com
-    ・パスワード　yamadazirou
